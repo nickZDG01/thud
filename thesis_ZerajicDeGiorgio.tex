@@ -1,8 +1,8 @@
-%% Le lingue utilizzate, che verranno passate come opzioni al pacchetto babel. Come sempre, l'ultima indicata sar� quella primaria.
-%% Se si utilizzano una o pi� lingue diverse da "italian" o "english", leggere le istruzioni in fondo.
+%% Le lingue utilizzate, che verranno passate come opzioni al pacchetto babel. Come sempre, l'ultima indicata sarà quella primaria.
+%% Se si utilizzano una o più lingue diverse da "italian" o "english", leggere le istruzioni in fondo.
 \def\thudbabelopt{english,italian}
 %% Valori ammessi per target: bach (tesi triennale), mst (tesi magistrale), phd (tesi di dottorato).
-%% Valori ammessi per aauheader: '' (vuoto -> nessun header Alpen Adria Univeristat), aics (Department of Artificial Intelligence and Cybersecurity), informatics (Department of Informatics Systems). Il nome del dipartimento � allineato con la versione inglese del logo UniUD.
+%% Valori ammessi per aauheader: '' (vuoto -> nessun header Alpen Adria Univeristat), aics (Department of Artificial Intelligence and Cybersecurity), informatics (Department of Informatics Systems). Il nome del dipartimento è allineato con la versione inglese del logo UniUD.
 \documentclass[target=mst,aauheader=]{thud}
 
 %% --- Informazioni sulla tesi ---
@@ -12,23 +12,20 @@
 %\course{Internet of Things, Big Data e Web}
 %\course{Matematica}
 %\course{Comunicazione Multimediale e Tecnologie dell'Informazione}
-\title{La supercazzola prematurata \\ con scappellamento a destra \\ (come se fosse antani)}
-\author{Conte Raffaello Mascetti}
-\supervisor{Prof.\ Alfeo Sassaroli}
-\cosupervisor{Arch.\ Rambaldo Melandri \and Dott.\ Giorgio Perozzi}
-\tutor{Guido Necchi}
+\title{Vulnerability Assessment di una rete aziendale}
+\author{Nicola Zerajic De Giorgio}
+\supervisor{Prof.\ Marino Miculan}
+\cosupervisor{}
+\tutor{}
 %% Campi obbligatori: \title, \author e \course.
 %% Altri campi disponibili: \reviewer, \tutor, \chair, \date (anno accademico, calcolato in automatico), \rights
-%% Con \supervisor, \cosupervisor, \reviewer e \tutor si possono indicare pi� nomi separati da \and.
-%% Per le sole tesi di dottorato:
-\phdnumber{313}
-\cycle{XXVIII}
-\contacts{Via della Sintassi Astratta, 0/1\\65536 Gigatera --- Italia\\+39 0123 456789\\\texttt{http://www.example.com}\\\texttt{inbox@example.com}}
+%% Con \supervisor, \cosupervisor, \reviewer e \tutor si possono indicare più nomi separati da \and.
+
 
 %% --- Pacchetti consigliati ---
 %% pdfx: per generare il PDF/A per l'archiviazione. Necessario solo per la versione finale
 \usepackage[a-1b]{pdfx}
-%% hyperref: Regola le impostazioni della creazione del PDF... pi� tante altre cose. Ricordarsi di usare l'opzione pdfa.
+%% hyperref: Regola le impostazioni della creazione del PDF... più tante altre cose. Ricordarsi di usare l'opzione pdfa.
 \usepackage[pdfa]{hyperref}
 %% tocbibind: Inserisce nell'indice anche la lista delle figure, la bibliografia, ecc.
 
@@ -40,18 +37,6 @@
 \begin{document}
 \maketitle
 
-%% Dedica (opzionale)
-\begin{dedication}
-	Al mio cane,\par per avermi ascoltato mentre ripassavo le lezioni.
-\end{dedication}
-
-%% Ringraziamenti (opzionali)
-\acknowledgements
-Sed vel lorem a arcu faucibus aliquet eu semper tortor. Aliquam dolor lacus, semper vitae ligula sed, blandit iaculis leo. Nam pharetra lobortis leo nec auctor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce ac risus pulvinar, congue eros non, interdum metus. Mauris tincidunt neque et aliquam imperdiet. Aenean ac tellus id nibh pellentesque pulvinar ut eu lacus. Proin tempor facilisis tortor, et hendrerit purus commodo laoreet. Quisque sed augue id ligula consectetur adipiscing. Vestibulum libero metus, lacinia ac vestibulum eu, varius non arcu. Nam et gravida velit.
-
-%% Sommario (opzionale)
-\abstract
-Nunc ac dignissim ipsum, quis pulvinar elit. Mauris congue nec leo ornare lobortis. Nulla hendrerit pretium diam nec lobortis. Nullam aliquam laoreet nisl, sit amet facilisis lectus accumsan ut. Duis et elit hendrerit metus venenatis condimentum. Integer id eros molestie, interdum leo sit amet, aliquet metus. Integer fermentum tristique magna, vel luctus neque rhoncus vel. Ut hendrerit et quam et semper. Mauris egestas, odio sed aliquet luctus, magna orci euismod odio, vitae lacinia tellus tellus non lectus. Aliquam urna neque, porta et mattis aliquam, congue sit amet lorem. In ultrices augue sit amet ante vehicula, vitae rhoncus turpis auctor. Donec porta scelerisque eros, at mollis enim imperdiet ut. 
 
 %% Indice
 \tableofcontents
@@ -66,12 +51,18 @@ Nunc ac dignissim ipsum, quis pulvinar elit. Mauris congue nec leo ornare lobort
 \mainmatter
 
 %% Parte
-%% La suddivisione in parti � opzionale; solitamente sono sufficienti i capitoli.
+%% La suddivisione in parti è opzionale; solitamente sono sufficienti i capitoli.
 %\part{Parte}
 
 %% Capitolo
-\chapter{Titolo del primo capitolo}
-In hac habitasse platea dictumst. Vestibulum consectetur dictum pellentesque. Suspendisse nunc neque, commodo ac imperdiet nec, sollicitudin vitae libero. Donec bibendum vel nunc vitae pharetra. In vel volutpat odio, et interdum dui. Duis mauris ligula, congue eget molestie at, tincidunt nec diam. Nam vitae eros nec arcu suscipit vehicula. Aliquam consectetur imperdiet elit, eget pretium arcu fringilla at. Maecenas \cite{Knu86} sed libero pulvinar, mattis tortor vel, fermentum enim.
+\chapter{Vulnerability Assessment: cos’è e perché è importante}
+Il \textit{vulnerability assessment} (VA) è un processo semi-automatizzato che permette di analizzare un insieme definito di \textit{asset}, ad esempio un’intera \textit{subnet} o un singolo \textit{host} in cerca di debolezze ed errori di configurazione. Bisogna considerare che il VA non è un \textit{penetration test}\footnote{Attività, spesso manuale e poco economica, che mira ad attaccare, come farebbe un malintenzionato, un’infrastruttura di rete. Di solito è un’attività che si svolge sporadicamente o al termine della progettazione di una rete aziendale per testarne la sicurezza e i sistemi di rilevamento intrusione e di emergenza.}. È invece un’attività che si dovrebbe svolgere periodicamente durante l’anno, sia per validare eventuali modifiche all’infrastruttura informatica, ad esempio aggiunta o riconfigurazione di apparati di rete o postazioni di lavoro, sia per verificare che il sistema non sia affetto dalle ultime vulnerabilità pubblicate dagli enti di ricerca\footnote{Ad esempio il sito del National Institute of Standards and Technology (NIST) pubblica periodicamente nuove vulnerabilità sul National Vulnerability Database.} e dai produttori. 
+Lo scopo di un VA, quindi, è quello di identificare, quantificare, classificare e prioritizzare i possibili difetti di un sistema informatico, ovvero le sue vulnerabilità. Come afferma il SysAdmin, Audit, Networking and Security Institute\footnote{Il SANS Institute, fondato negli Stati Uniti nel 1989, fornisce percorsi di educazione e addestramento in materia di sicurezza informatica.} \textit{«vulnerabilities are the gateways by which threats are manifested»}. Le vulnerabilità sono quindi le debolezze attraverso le quali un sistema può essere compromesso.
+Nella maggior parte dei casi le vulnerabilità di un sistema, ad esempio una postazione di lavoro, sono conseguenza di difetti o errori di programmazione, i cosiddetti \textit{bug}, del sistema operativo (o del firmware) e dei software installati su di esso. Spesso le case di sviluppo, nel processo di progettazione e scrittura di un software, prediligono un approccio orientato al raggiungimento di obiettivi quali implementazione di nuove \textit{features}, usabilità, performance e soprattutto costi bassi e tempi rapidi. Tutto ciò si traduce in software con bassi standard di sicurezza e con la necessità da parte degli utenti di eseguire periodici aggiornamenti di sicurezza, soprattutto nelle fasi iniziali del rilascio del software. Tuttavia, anche chi segue un approccio di \textit{security by design}\footnote{Approccio di sviluppo software e hardware che considera la sicurezza come requisito principale, adattando il resto della progettazione ad essa.} nello sviluppo delle proprie applicazioni non è esente da una periodica manutenzione e da un’accurata analisi delle possibili falle di sicurezza nel codice. Una delle preoccupazioni più grandi di uno sviluppatore, infatti, è quella di vedere pubblicato sulla rete, solitamente nel \textit{Dark Web}, un \textit{exploit}\footnote{Procedura (spesso automatizzata in forma di script) che permette di violare un sistema informatico sfruttando una sua vulnerabilità.} di una vulnerabilità zero-day di un proprio programma. Tali vulnerabilità sono molto pericolose in quanto al momento della loro scoperta e pubblicazione non sono ancora disponibili \textit{patch} di sicurezza.
+A seguito di queste considerazioni e tenendo conto del grande numero di applicazioni e servizi installati su una semplice postazione di lavoro, si può immaginare quanto sia estesa la superficie di attacco di un’infrastruttura informatica aziendale. Ogni software è una potenziale porta aperta per un criminale. Risulta quindi fondamentale avere uno strumento come il \textit{vulnerability assessment} che permetta di rilevare in anticipo e prima di un possibile malintenzionato le falle di sicurezza più critiche della rete aziendale, così da prevenire conseguenze potenzialmente disastrose.
+Le debolezze di un’infrastruttura informatica però non si limitano agli applicativi software. Una corretta e robusta configurazione degli apparati di rete, quali switch, router, firewall, server e NAS, contribuisce a rendere l’infrastruttura più resistente e meno violabile. Nel migliore degli scenari, infatti, avere opportune regole che permettano di organizzare, limitare e controllare sia le connessioni tra i sistemi che i singoli accessi degli utenti fisici a tali apparati, consente di isolare gli attacchi e limitare quindi i danni. Il VA aiuta anche in questo senso ad irrobustire la struttura informatica aziendale andando ad analizzare, rilevare e dare delle possibili soluzioni ad eventuali errori di configurazione e sviste degli amministratori di sistema, dall’uso di password di accesso deboli o di default, all’impiego di protocolli insicuri e obsoleti, all’esposizione in rete di servizi non essenziali.
+Il VA si rivela essere quindi il primo strumento di protezione e di messa in sicurezza delle risorse e degli asset aziendali. Esso si sviluppa in più fasi: pianificazione e raccolta delle informazioni riguardo l’organizzazione e l’infrastruttura aziendale, esecuzione della scansione, analisi dei risultati, risoluzione delle problematiche identificate o \textit{remediation}.
+
 
 %% Sezione
 \section{Titolo della Sezione}
@@ -120,7 +111,7 @@ Sed purus libero, vestibulum ut nibh vitae, mollis ultricies augue. Pellentesque
 %Maecenas tempor elit sed arcu commodo, dapibus sagittis leo egestas. Praesent at ultrices urna. Integer et nibh in augue mollis facilisis sit amet eget magna. Fusce at porttitor sapien. Phasellus imperdiet, felis et molestie vulputate, mauris sapien tincidunt justo, in lacinia velit nisi nec ipsum. Duis elementum pharetra lorem, ut pellentesque nulla congue et. Sed eu venenatis tellus, pharetra cursus felis. Sed et luctus nunc. Aenean commodo, neque a aliquam bibendum, mauris augue fringilla justo, et scelerisque odio mi sit amet diam. Nulla at placerat nibh, nec rutrum urna. Donec ut egestas magna. Aliquam erat volutpat. Phasellus vestibulum justo sed purus mattis, vitae lacinia magna viverra. Nulla rutrum diam dui, vel semper mi mattis ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec id vestibulum lectus, eget tristique est.
 
 %% Bibliografia (praticamente obbligatoria)
-\bibliographystyle{plain_\languagename}%% Carica l'omonimo file .bst, dove \languagename � la lingua attiva.
+\bibliographystyle{plain_\languagename}%% Carica l'omonimo file .bst, dove \languagename è la lingua attiva.
 %% Nel caso in cui si usi un file .bib (consigliato)
 \bibliography{thud}
 %% Nel caso di bibliografia manuale, usare l'environment thebibliography.
