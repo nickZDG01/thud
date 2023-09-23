@@ -40,7 +40,6 @@
 \begin{document}
 \maketitle
 
-
 %% Indice
 \tableofcontents
 
@@ -48,7 +47,7 @@
 %\listoftables
 
 %% Lista delle figure (se presenti)
-%\listoffigures
+\listoffigures
 
 %% Corpo principale del documento
 \mainmatter
@@ -58,6 +57,24 @@
 %\part{Parte}
 
 %% Capitolo
+\chapter{Introduzione}
+
+Per un’azienda l’infrastruttura di rete costituisce il principale strumento di produttività e per questo è un elemento di estremo valore. È attraverso tale infrastruttura che è possibile per un utente accedere alle risorse dell'azienda, sia esso collegato alla intranet aziendale che a una rete wifi pubblica esterna.
+
+Negli anni, la continua diffusione di tecnologie accessibili sempre più all’avanguardia e la conseguente digitalizzazione sia degli enti pubblici che privati, ha permesso alle aziende di potenziare lo scambio di informazioni, tra dipendenti e non solo, rendendo l’infrastruttura informatica parte integrante ed elemento indispensabile nell’organigramma aziendale. Le reti aziendali sono quindi diventate mano a mano più aperte ed estese, permettendo a un maggior numero di utenti, anche esterni, di accedere a una maggiore quantità di informazioni, sia che risiedano in un server dipartimentale locale che in un servizio basato sul cloud.
+
+Proprio questa tendenza a progettare sistemi sempre più aperti, e quindi con una superficie di attacco sempre più estesa, ha convinto le aziende a investire maggiormente sulla sicurezza per tutelare il proprio patrimonio, oltre che dalle minacce sempre presenti della rete intesa come Internet, anche da attacchi interni.
+
+La fase di progettazione di un’infrastruttura informatica aziendale, quindi, dovrebbe avere la sicurezza come fulcro: ogni modifica atta a raggiungere un particolare obiettivo, come performance, disponibilità, usabilità o scalabilità, dovrebbe portare a una scrupolosa analisi preliminare alla ricerca di nuove e inaspettate vulnerabilità, giungendo infine a una forma di compromesso. In caso di attacco informatico, infatti, qualsiasi altro \textit{technical goal} che un’azienda possa desiderare cade in secondo piano. Si pensi ad esempio ad un attacco DDoS (\textit{Distributed Denial of Service}) in grado di compromettere la disponibilità dell’intera infrastruttura di rete anche per periodi prolungati, oppure si consideri la possibilità per un attaccante di intercettare le connessioni interne o esterne dell’azienda, o ancora, si pensi agli ormai noti e temuti attacchi \textit{Ransomware} capaci di causare enormi danni\footnote{Da un rapporto del 2022 effettuato da IBM si stima che il costo medio di un attacco ransomware ammonti a 4,45 milioni di dollari (Costo di una violazione di dati nel 2022 - Italia | IBM).
+Nella primavera del 2017 diverse centinaia di migliaia di computer in tutto il mondo sono stati infettati dal ransomware \textit{WannaCry}. Sono state colpite in particolare le infrastrutture del \textit{National Health Service} britannico (NHS).
+}.
+
+Un altro aspetto importante da tenere in considerazione riguarda il recente regolamento europeo sulla protezione dei dati personali GDPR\footnote{}. Con la sua introduzione, molte delle responsabilità sul trattamento dei dati personali sono state attribuite al \textit{Data controller} (il titolare del trattamento dei dati) e quindi all’azienda a cui gli utenti cedono i propri dati. Tale figura ha la responsabilità di prevenire e rimediare ai cosiddetti \textit{data breach} o violazioni dei dati personali. Diverse aziende sono state vittime di attacchi informatici che hanno causato la diffusione di informazioni e materiale sensibile appartenenti agli utenti dei servizi erogati da tali aziende\footnote{}. Le conseguenze in questo caso consistono, oltre che in una cospicua multa, anche in un danno di immagine, dato che la violazione deve essere resa pubblica entro 72 ore\footnote{}.
+
+In conclusione, le infrastrutture informatiche aziendali sono sempre più estese e con loro anche le superfici di attacco si sono espanse per salvaguardare l’asset più importante di un’organizzazione, cioè la propria reputazione, è necessario investire nella sicurezza in senso lato, non solo durante la progettazione e l’implementazione dell’infrastruttura informatica ma anche e soprattutto durante il suo ciclo vitale, attuando frequenti attività di monitoraggio e manutenzione\footnote{}. Le principali modalità per soddisfare tali requisiti consistono in periodiche campagne di sensibilizzazione e consapevolezza delle più diffuse minacce informatiche per il personale aziendale e in una altrettanto regolare analisi e valutazione empirica del corrente stato dell’intera infrastruttura di rete in termini di vulnerabilità, configurazione e organizzazione dei dispositivi che compongono la rete aziendale.
+Questo processo prende il nome di \textit{Vulnerability Assessment}.
+
+
 \chapter{Vulnerability Assessment: cos’è e perché è importante}
 
 Il \textit{vulnerability assessment} (VA) è un processo semi-automatizzato che permette di analizzare un insieme definito di \textit{asset}, ad esempio un’intera \textit{subnet} o un singolo \textit{host} in cerca di debolezze ed errori di configurazione. Bisogna considerare che il VA non è un \textit{penetration test}\footnote{Attività, spesso manuale e poco economica, che mira ad attaccare, come farebbe un malintenzionato, un’infrastruttura di rete. Di solito è un’attività che si svolge sporadicamente o al termine della progettazione di una rete aziendale per testarne la sicurezza e i sistemi di rilevamento intrusione e di emergenza.}. È invece un’attività che si dovrebbe svolgere periodicamente durante l’anno, sia per validare eventuali modifiche all’infrastruttura informatica, ad esempio aggiunta o riconfigurazione di apparati di rete o postazioni di lavoro, sia per verificare che il sistema non sia affetto dalle ultime vulnerabilità pubblicate dagli enti di ricerca\footnote{Ad esempio il sito del National Institute of Standards and Technology (NIST) pubblica periodicamente nuove vulnerabilità sul National Vulnerability Database.} e dai produttori.
@@ -96,7 +113,12 @@ Una scansione di rete interna viene effettuata da uno strumento installato su un
 
 Di seguito viene illustrata la schematizzazione dei componenti di una scansione interna.
 
+\begin{figure}[h]
+\centering
 \includegraphics{images/scan_interna.png}
+    \caption{Scansione degli asset interni alla rete.}
+\end{figure}
+
 
 Come si evince dall’immagine, la macchina virtuale, oltre ad avere la necessità di accedere alla maggior parte degli asset della rete, ha bisogno di collegarsi a Internet per comunicare con la \textit{cloud platform}. Essa è la piattaforma che gestisce l’intero processo di \textit{vulnerability assessment}, dalla pianificazione e programmazione delle scansioni, alla fase di \textit{remediation} e \textit{patch management}\footnote{Attività periodica di gestione, prioritizzazione, selezione e schedulazione degli aggiornamenti dei software e dei sistemi.}. Una volta installata e configurata la \textit{virtual appliance} è possibile procedere con l’esecuzione della scansione dei \textit{target}.
 
@@ -166,9 +188,6 @@ Ritornando al funzionamento dello scanner, esso oltre a richiedere generiche inf
 
 Il tag 20 identifica il servizio di condivisione risorse di rete. Lo scanner può quindi andare più a fondo e tentare di verificare se nel \textit{target} è attiva la cosiddetta \textit{null session}, che permette ad un utente remoto di accedere a certe risorse del sistema tramite connessioni anonime, quindi senza username e password, ovvero una sessione nulla:
 
-\hfill \break
-\hfill \break
-
 \begin{minted}{powershell}
   $ smbclient //192.168.1.52/IPC$ -U""
 
@@ -183,18 +202,22 @@ Come si può notare è stato possibile accedere anonimamente alla \textit{share}
 
 Lo strumento di scansione, quindi, a seconda della risposta da parte del \textit{target} a una certa richiesta che mira a verificare la presenza o meno di una falla di sicurezza, classifica il servizio esposto come vulnerabile se tale risposta trova una corrispondenza nel database delle vulnerabilità consultabile nella piattaforma in cloud.
 
-Lo scopo di una scansione esterna, invece, è quello di evidenziare le debolezze di un’infrastruttura di rete dal punto di vista di un attaccante posto al di fuori della rete privata aziendale. Si vuole, quindi, valutare la sua sicurezza e la corretta configurazione delle interfacce pubbliche dei dispositivi posti “ai bordi” della rete. Di conseguenza non è possibile giungere a questo obiettivo tramite uno strumento di scansione posto all’interno della rete che si vuole analizzare. La soluzione è utilizzare un \textit{cloud scanner}. Questi strumenti sono programmi in cloud che girano su server esterni di proprietà di aziende specializzate in sicurezza informatica. Nella configurazione di questa tipologia di scansione vengono specificati tutti i possibili \textit{endpoint} della rete in oggetto: gli indirizzi IP delle interfacce pubbliche di firewall e router, eventuali collegamenti a VPN e riferimenti di possibili server esposti in rete.
+Lo scopo di una scansione esterna (Figura 1.2), invece, è quello di evidenziare le debolezze di un’infrastruttura di rete dal punto di vista di un attaccante posto al di fuori della rete privata aziendale. Si vuole, quindi, valutare la sua sicurezza e la corretta configurazione delle interfacce pubbliche dei dispositivi posti “ai bordi” della rete. Di conseguenza non è possibile giungere a questo obiettivo tramite uno strumento di scansione posto all’interno della rete che si vuole analizzare. La soluzione è utilizzare un \textit{cloud scanner}. Questi strumenti sono programmi in cloud che girano su server esterni di proprietà di aziende specializzate in sicurezza informatica. Nella configurazione di questa tipologia di scansione vengono specificati tutti i possibili \textit{endpoint} della rete in oggetto: gli indirizzi IP delle interfacce pubbliche di firewall e router, eventuali collegamenti a VPN e riferimenti di possibili server esposti in rete.
 
-Di seguito uno schema di tale concetto.
+%Di seguito uno schema di tale concetto.
 
+\begin{figure}[h]
+\centering
 \includegraphics[scale=1.2]{images/scan_esterna.png}
+    \caption{Scansione degli asset ai confini della rete.}
+\end{figure}
+
 
 Tramite questa architettura la piattaforma esterna in cloud è in grado di interrogare gli apparati di rete sulle loro interfacce pubbliche. Solitamente vengono rilevate configurazioni deboli come l’utilizzo di protocolli di sicurezza obsoleti oppure generiche vulnerabilità di server esposti.
 
 Finora abbiamo preso in considerazione le scansioni \textit{agentless}, ovvero quelle scansioni che vengono eseguite attivamente da uno strumento di analisi, sia esso una \textit{virtual appliance} o un \textit{cloud scanner}. Esistono però anche le scansioni basate sui cosiddetti agenti. Una configurazione \textit{agent-based} consiste nell’avere per ogni \textit{host target} (oppure per i più critici) un software (o endpoint) chiamato agente installato localmente nella macchina. Questo programma raccoglie in tempo reale i parametri del sistema, l’utilizzo delle risorse, i software installati, le connessioni di rete e gli eventi più sospetti. Oltre a queste informazioni, l’agente, come un qualsiasi software antivirus, effettua periodiche scansioni del sistema sul quale è installato. Un grande vantaggio di questa soluzione consiste nell’avere per ogni asset report più accurati e meno falsi negativi, inoltre le analisi possono essere effettuate in autonomia dalle singole macchine senza compromettere la disponibilità della rete. Ulteriore vantaggio da questa soluzione si ha quando l’azienda permette di ospitare, magari occasionalmente, dispositivi non gestiti, ad esempio i cosiddetti BYOD (\textit{Bring Your Own Device}). Questi dispositivi sono una reale minaccia per la rete aziendale in quanto sono devices non monitorati ad uso personale e molto spesso contengono software non aggiornati e vulnerabili. Risulta quindi evidente che una valutazione periodica \textit{agentless} dell’infrastruttura non sia ottimale in questo caso. È plausibile infatti che durante tali scansioni non sempre questi dispositivi siano presenti fisicamente nella rete aziendale e che quindi non sia possibile valutarne e correggerne le vulnerabilità. Per questo motivo, in scenari come quello appena illustrato, conviene tenere in considerazione le scansioni basate sugli agenti. Idealmente una scansione per le vulnerabilità dovrebbe consistere in un approccio ibrido: imbastire una scansione \textit{agentless} in modo da valutare lo stato generale della rete, permettendo anche di rilevare e analizzare asset che non erano stati presi in considerazione; predisporre per gli asset più sensibili ed esposti a rischi delle scansioni \textit{agent-based}.
 
 I dati raccolti dalle scansioni vengono poi inviati alla piattaforma in cloud e processati in report.
-
 
 \section{Analisi dei risultati}
 Senza un’accurata ispezione dei risultati, prima di presentarli al committente, il \textit{vulnerability assessment} avrebbe un valore molto limitato. Al termine delle scansioni lo strumento di analisi genera automaticamente un report per ogni attività, che prende il nome di \textit{technical report}. Questi documenti raccolgono, per ogni \textit{subnet} analizzata, tutte le informazioni e i dati utili rilevati sui singoli dispositivi. Tra questi vi sono, oltre al numero di vulnerabilità suddiviso per criticità e tipologia e le rispettive descrizioni, riferimenti ai sistemi operativi rilevati e ai servizi attivi in ascolto. Tali report, in quanto generati in automatico, necessitano di essere revisionati accuratamente per verificare eventuali inesattezze o imprecisioni. Come in qualsiasi attività di testing, infatti, è molto probabile che possano essere presenti falsi positivi. Prendiamo, ad esempio, in considerazione lo scenario in cui un web server venga interrogato dal \textit{vulnerability scanner}. Quest’ultimo, a seconda del payload che invia, si aspetta una determinata risposta da parte del server se questo è vulnerabile. Tuttavia, se la risposta è ambigua o non rientra tra gli scenari che il tool di scansione si aspetterebbe, lo scanner potrebbe classificare in modo inesatto il server. Esso, ad una determinata richiesta, potrebbe smettere di rispondere quando al contrario lo scanner si aspetterebbe una risposta, per esempio un messaggio di errore nel caso in cui non fosse vulnerabile. Come interpretare questa assenza di risposta? La \textit{query} dello scanner potrebbe aver causato un’interruzione del servizio e quindi il server sarebbe vulnerabile ad attacchi di tipo \textit{Denial of Service}. Tuttavia, il server potrebbe aver deciso di interrompere la connessione seguendo un meccanismo di difesa implementato ad esempio dall’amministratore di sistema. In questi casi lo strumento di scansione interpreterà l’evento ipotizzando lo scenario peggiore e classificherà il \textit{target} come vulnerabile. È preferibile, infatti, avere falsi positivi rispetto a rischiare di ignorare una possibile vulnerabilità. Altro rumore di fondo ricorrente nei report generati è dovuto alla valutazione della validità dei certificati SSL installati sui dispositivi. Ovviamente è corretto che lo scanner identifichi e controlli la validità di un certificato, quindi che esso risulti emesso da un’autorità attendibile o che non sia scaduto. A nessuna azienda farebbe piacere ricevere segnalazioni dai propri clienti riguardo a problemi di accesso e avvisi di sicurezza del proprio sito web. Diversa invece è la questione quando si tratta di certificati \textit{self-signed} installati in quei dispositivi di gestione come router, firewall, switch ecc. ai quali si può accedere solo dalla rete locale interna. Questi dispositivi possiedono un certificato auto generato ma, dato che solitamente l’accesso a tali dispositivi viene effettuato direttamente tramite indirizzo IP, l’errore che il browser propone può essere ignorato, in quanto siamo consapevoli che stiamo contattando il dispositivo con quello specifico indirizzo. Inoltre non vi è nemmeno il rischio di intercettazione di informazioni in chiaro, in quanto se il dispositivo possiede un certificato correttamente installato ed è configurato per rispondere in \textit{https}, la connessione viene crittografata pur trattandosi di un certificato non riconosciuto. Data la quantità di dispositivi di gestione presenti in una rete aziendale, si può immaginare quanto “rumore” essi possano causare in un \textit{technical report}. È per questo che è importante usare i risultati delle prime scansioni per affinare e calibrare lo strumento aggiungendo nella sua configurazione eventuali eccezioni. Nel seguito questo aspetto verrà illustrato più in dettaglio.
@@ -203,30 +226,94 @@ Il lavoro dell’analista è quindi quello di interpretare, nel modo più oggett
 
 I risultati delle analisi dovranno essere esposti anche al personale amministrativo. L’analista deve riportare i risultati nell’\textit{executive report} in linguaggio naturale limitando i termini tecnici. Il documento dovrà quindi essere comprensibile da persone non esperte e illustrerà, anche per mezzo di grafici, per ogni \textit{subnet} analizzata, la relativa situazione in termini di numero, criticità e distribuzione delle vulnerabilità. Insieme a una breve descrizione delle criticità più rilevanti, vengono date delle possibili soluzioni per porne rimedio.
 
-
 \section{Remediation}
 
 Un’esecuzione periodica del \textit{vulnerability assessment} permette di identificare prima di un potenziale malintenzionato le criticità maggiori all’interno e all’esterno della rete aziendale. La fase di risoluzione di tali criticità è un altrettanto regolare processo di indagine e documentazione degli asset vulnerabili più esposti. Il documento riepilogativo, stilato nella fase di analisi dei risultati, permette ai tecnici e ai manager di avere una visione di insieme riguardo gli asset e le sottoreti più a rischio e considerare quindi le migliori soluzioni, anche a lungo termine. Al termine di ogni descrizione delle risultanze trovate nei \textit{target} viene presentata una loro possibile risoluzione. Nell’\textit{executive report} questa consiste in una spiegazione sintetica, mentre il \textit{technical report} dato in mano al reparto IT aziendale presenta le problematiche e le relative risoluzioni in modo più specifico e pratico, con riferimenti alla documentazione ufficiale dei servizi in uso.
 
 Le vulnerabilità sono classificate in base alla loro severità, seguendo una serie di metriche che verranno presentate nel seguito. Vulnerabilità con \textit{severity} bassa e media non presentano un rischio diretto per la sicurezza dell’infrastruttura aziendale, ma se sfruttate potrebbero rivelare informazioni utili a un potenziale attaccante per la pianificazione ed esecuzione di un attacco. Le vulnerabilità di livello alto e critico invece necessitano di interventi tempestivi in quanto il loro \textit{exploit} permette gravi compromissioni alla confidenzialità, integrità o disponibilità della rete.
 
-Idealmente la fase di \textit{remediation} dovrebbe porre rimedio a tutte quelle vulnerabilità che presentano un livello di rischio considerevole. Nel seguito verranno presentate le tipologie di vulnerabilità che richiedono maggiore attenzione. Nella pratica, eliminare e isolare più falle possibili richiede un’accurata analisi dei sistemi attivi, dei rispettivi servizi esposti sia verso la rete pubblica che nella intranet aziendale e delle politiche di visibilità e connessione tra le varie \textit{subnet} aziendali. Porre rimedio alle debolezze trovate durante l’analisi vuol dire anche trovare dei compromessi fra la praticità e la comodità di utilizzo dei sistemi con i quali ci si interfaccia e la loro conformità dal punto di vista della sicurezza. Si pensi ad esempio all’implementazione di meccanismi di autenticazione a doppio fattore\footnote{Meccanismo che in fase di autenticazione a un servizio richiede, oltre a username e password, di inserire un codice temporaneo generato da un proprio dispositivo mobile in modo da dimostrare il suo possesso.} o all’introduzione di politiche più stringenti in merito ai comportamenti ai quali gli utenti finali devono attenersi. Altri compromessi possono riguardare cali di \textit{performance} della rete a seguito dell’installazione di dispositivi e/o software di analisi e scansione dei pacchetti di rete delle connessioni in entrata e in uscita.
+Idealmente la fase di \textit{remediation} dovrebbe porre rimedio a tutte quelle vulnerabilità che presentano un livello di rischio considerevole. Nel seguito verranno presentate le tipologie di vulnerabilità che richiedono maggiore attenzione. Nella pratica, eliminare e isolare più falle possibili richiede un’accurata analisi dei sistemi attivi, dei rispettivi servizi esposti sia verso la rete pubblica che nella intranet aziendale e delle politiche di visibilità e connessione tra le varie \textit{subnet} aziendali. Porre rimedio alle debolezze trovate durante l’analisi vuol dire anche trovare dei compromessi fra la praticità e la comodità di utilizzo dei sistemi con i quali ci si interfaccia e la loro conformità dal punto di vista della sicurezza. Si pensi ad esempio all’implementazione di meccanismi di autenticazione a doppio fattore\footnote{Meccanismo che in fase di autenticazione a un servizio richiede, oltre a username e password, l'inserimento di un codice temporaneo generato da un proprio dispositivo mobile in modo da dimostrare il suo possesso.} o all’introduzione di politiche più stringenti in merito ai comportamenti ai quali gli utenti finali devono attenersi. Altri compromessi possono riguardare cali di \textit{performance} della rete a seguito dell’installazione di dispositivi e/o software di analisi e scansione dei pacchetti di rete delle connessioni in entrata e in uscita.
 
 Per tenere traccia dei progressi, in termini di risoluzione delle problematiche, vengono stilati i \textit{vulnerability assessment} 
 comparativi. Questi documenti prendono in considerazione due o più periodi nei quali si è svolta una valutazione della sicurezza e li compara con i risultati dell’ultima esecuzione di un \textit{vulnerability assessment}. Questo permette di avere uno storico dettagliato con quantità e tipologia di vulnerabilità e di dispositivi affetti potendo metterlo in relazione con la rilevazione più recente e valutando quindi l’operato e gli sforzi dell’azienda nella messa in sicurezza degli \textit{asset} più esposti e vulnerabili.
 
 Infine tutti i documenti redatti, ad eccezione del \textit{technical report}, vengono discussi insieme al committente e al responsabile del reparto IT.
 
+\chapter{Caso di studio: analisi delle vulnerabilità di una rete aziendale}
+In questo capitolo si espone un caso di studio reale di esecuzione di un \textit{vulnerability assessment} per un'azienda metalmeccanica che produce componenti per il settore dell'Automotive.
 
+La scansione è stata eseguita nel febbraio 2023 e fa parte della commessa richiesta dall'azienda per la valutazione della sicurezza della rete, che prevede, oltre al \textit{vunerability assessment}, attività di \textit{penetration test} e campagne di \textit{phishing}\footnote{k}. 
 
+\section{Strumentazione}
+Esistono un gran numero di \textit{vulnerability scanning tools} che differiscono, oltre che per il prezzo , in base alle tecnologie che supportano (oltre a Windows, Linux e macOS potrebbero esserci sistemi insoliti per i quali lo scanner non è stato programmato), se sono dedicati anche alle \textit{web applications scans}  e in base ad eventuali configurazioni come il grado di automazione e la possibilità di schedulare le scansioni. La maggior parte dei tool di scansione però consiste in software accessibili da piattaforme in cloud attraverso il browser.
+
+Nel nostro caso si è impiegato lo strumento Qualys VMDR (Vulnerability Management, Detection, and Response). Nell'appendice \ref{appendix:a} viene illustrato come si presenta il software.
+
+Tramite la sua interfaccia è possibile avere una panoramica delle scansioni già eseguite, in esecuzione o programmate e delle vulnerabilità trovate più di frequente, è possibile consultare i \textit{technical} ed \textit{executive} report e creare dei piani di \textit{remediation}. Fondamentale è anche la possibilità di consultare il database costantemente aggiornato delle ultime vulnerabilità pubblicate.
+
+È possibile inoltre organizzare gli asset in gruppi che andranno a definire i \textit{target} della scansione. Figura \ref{fig:qualys_targets}.
+
+\section{\textit{Target definition}}
+Lo \textit{scope} della scansione viene definito dal cliente e, insieme al reparto IT, vengono comunicate tutte le \textit{subnet} da includere, o le più prioritarie. La lista seguente definisce le sottoreti che saranno oggetto della scansione:
+
+%\includegraphics[scale=1.2]{images/scan_esterna.png}
 
 %% Fine dei capitoli normali, inizio dei capitoli-appendice (opzionali)
 \appendix
 
 %\part{Appendici}
 
-\chapter{Titolo della prima appendice}
+\chapter{Interfacce di Qualys}
+\label{appendix:a}
 
+\begin{figure}
+\centering
+    \includegraphics[scale=0.329]{images/qualys_dashboard.png}
+    \caption{\textit{Dashboard}. Visualizza una panoramica, personalizzabile attraverso \textit{widget}, dei risultati e dell'andamento delle scansioni eseguite.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.329]{images/qualys_vuln.png}
+    \caption{\textit{Vulnerabilities}. Visualizza una lista delle vulnerabilità trovate nelle ultime scansioni effettuate.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.329]{images/qualys_scans.png}
+    \caption{\textit{Scans}. Da qui è possibile configurare, schedulare e monitorare l'esecuzione delle scansioni vere e proprie.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.329]{images/qualys_reports.png}
+    \caption{\textit{Reports}. Questa sezione permette di visualizzare i report generati dalle scansioni oppure generarne manualmente. È possibile anche personalizzare i \textit{template} con i quali vengono generati i report.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.425]{images/qualys_remediation.png}
+    \caption{\textit{Remediation}. Visualizza la lista, con le relative scadenze di risoluzione, delle vulnerabilità trovate e non ancora risolte.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.329]{images/qualys_assets.png}
+    \caption{\textit{Assets}. Permette di creare e gestire gli asset e i relativi gruppi che saranno oggetto delle scansioni.}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{images/qualys_targets.png}
+    \caption{Lista degli \textit{asset groups}. Ogni gruppo è costituito da indirizzi IP singoli, intervalli o \textit{subnet} intere, o da specifici domini.}
+    \label{fig:qualys_targets}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.35]{images/qualys_kb.png}
+    \caption{\textit{Knowledgebase}. Questo è il database delle vulnerabilità proprietario di \textit{Qualys} costantemente aggiornato. È possibile, per ogni voce, aggiungere commenti che verranno visualizzati nei report, modificare il livello di criticità delle vulnerabilità o disabilitarle in modo che le scansioni le ignorino.}
+\end{figure}
 
 %% Parte conclusiva del documento; tipicamente per riassunto, bibliografia e/o indice analitico.
 \backmatter
