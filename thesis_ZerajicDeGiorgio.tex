@@ -247,9 +247,9 @@ comparativi. Questi documenti prendono in considerazione due o più periodi nei 
 Infine tutti i documenti redatti, ad eccezione del \textit{technical report}, vengono discussi insieme al committente e al responsabile del reparto IT.
 
 \chapter{Caso di studio: analisi delle vulnerabilità di una rete aziendale}
-In questo capitolo si espone un caso di studio reale di esecuzione di un \textit{vulnerability assessment} per un'azienda metalmeccanica che produce componenti per il settore dell'Automotive.
+In questo capitolo si espone un caso di studio reale di \textit{vulnerability assessment}, eseguito per un'azienda metalmeccanica che produce componenti per il settore dell'Automotive.
 
-La scansione è stata eseguita nel febbraio 2023 e fa parte della commessa richiesta dall'azienda per la valutazione della sicurezza della rete, che prevede, oltre al \textit{vunerability assessment}, attività di \textit{penetration test} e campagne di \textit{phishing}\footnote{k}. 
+La scansione è stata eseguita gennaio e febbraio 2023 e fa parte della commessa richiesta dall'azienda per la valutazione della sicurezza della rete, che prevede, oltre al \textit{vunerability assessment}, attività di \textit{penetration test} e campagne di \textit{phishing}\footnote{k}. 
 
 \section{Strumentazione}
 Esistono un gran numero di \textit{vulnerability scanning tools} che differiscono, oltre che per il prezzo , in base alle tecnologie che supportano (oltre a Windows, Linux e macOS potrebbero esserci sistemi insoliti per i quali lo scanner non è stato programmato), se sono dedicati anche alle \textit{web applications scans}  e in base ad eventuali configurazioni come il grado di automazione e la possibilità di schedulare le scansioni. La maggior parte dei tool di scansione però consiste in software accessibili da piattaforme in cloud attraverso il browser.
@@ -258,12 +258,39 @@ Nel nostro caso si è impiegato lo strumento Qualys VMDR (Vulnerability Manageme
 
 Tramite la sua interfaccia è possibile avere una panoramica delle scansioni già eseguite, in esecuzione o programmate e delle vulnerabilità trovate più di frequente, è possibile consultare i \textit{technical} ed \textit{executive} report e creare dei piani di \textit{remediation}. Fondamentale è anche la possibilità di consultare il database costantemente aggiornato delle ultime vulnerabilità pubblicate.
 
-È possibile inoltre organizzare gli asset in gruppi che andranno a definire i \textit{target} della scansione. Figura \ref{fig:qualys_targets}.
+È possibile inoltre organizzare gli asset in gruppi che andranno a definire i \textit{target} della scansione (Figura \ref{fig:qualys_targets}).
 
 \section{\textit{Target definition}}
-Lo \textit{scope} della scansione viene definito dal cliente e, insieme al reparto IT, vengono comunicate tutte le \textit{subnet} da includere, o le più prioritarie. La lista seguente definisce le sottoreti che saranno oggetto della scansione:
+Lo \textit{scope} della scansione viene definito dal cliente e, insieme al reparto IT, vengono comunicate tutte le \textit{subnet} da includere, o le più prioritarie. Questo VA considera 27 sottoreti private distinte e 4 indirizzi IP pubblici. Le figure \ref{fig:target_definition_int} e \ref{fig:target_definition_ext} illustrano una porzione del documento che specifica tali indirizzi.
 
-%\includegraphics[scale=1.2]{images/scan_esterna.png}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.8]{images/target_definition_int.png}
+    \caption{Definizione dei \textit{target} privati.}
+    \label{fig:target_definition_int}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.8]{images/target_definition_ext.png}
+    \caption{Definizione dei \textit{target} pubblici.}
+    \label{fig:target_definition_ext}
+\end{figure}
+
+Come si può notare dalla figura \ref{fig:target_definition_int}, oltre alla definizione delle reti oggetto della scansione, viene data anche una loro descrizione in merito al loro ambito. Questo dato, se non viene indicato dai sistemisti dell'azienda, può essere estrapolato eseguendo una preliminare \textit{discovery scan} in modo da rilevare i sistemi operativi e i servizi attivi. In questo caso però i risultati sono indicativi e potrebbero quindi portare a imprecisioni.
+
+Stando a quanto dichiarato da questo documento preliminare, l'infrastruttura in questione presenta un buon livello di segmentazione della rete: la rete Guest è su una classe di IP completamente diversa dalle altre, i macchinari di produzione sono separati dalla domotica e anche le stampanti risiedono in una \textit{subnet} diversa da quella delle postazioni di lavoro (LAN). Anche la rete di \textit{management}\footnote{Rete generalmente usata dagli amministratori di sistema per accedere ai sistemi di gestione dell'intera infrastruttura, ad esempio host di virtualizzazione, switch, firewall o NAS.} si trova su una rete a sè. Inoltre si nota che anche la rete wireless (WLAN) è separata dalla LAN cablata.
+
+Queste informazioni sono utili per rendere le scansioni più accurate e per avere un contesto, seppur superficiale, della situazione.
+
+\section{Configurazione della scansione}
+Prima ancora di configurare e schedulare le scansioni c'è bisogno di fare il \textit{deploy} della \textit{virtual appliance}, ovvero quella macchina virtuale che sarà installata nell'ambiente aziendale e avrà accesso a tutti i \textit{target} in modo da poter comunicare con loro. Nel nostro scenario la macchina virtuale risiederà nella rete 192.168.1.0/24 con un indirizzo IP configurato staticamente (Figura ).
+
+A questo punto è necessario configurare le opportune regole di firewall per fare in modo che la macchina virtuale comunichi, tramite tutte le porte o quelle che verranno specificate in seguito, con i segmenti di rete definiti precedentemente. Per fare questo si potrebbe semplicemente creare una regola che permetta il traffico proveniente dalla rete 192.168.1.0/24 verso tutte le altre. Tuttavia, ciò risulterebbe in una falla di sicurezza da non sottovalutare. Qualsiasi host collegato a tale rete, infatti, sarebbe in grado di accedere a tutta l'infrastruttura. Certamente questa configurazione del firewall sarebbe attiva solamente per il periodo della scansione. Ma si pensi alle conseguenze che potrebbe portare una dimenticanza da parte dei responsabili nella dismissione di questa regola.
+
+La procedura corretta, invece, consiste nel creare una \textit{reservation}\footnote{}
+
+
 
 %% Fine dei capitoli normali, inizio dei capitoli-appendice (opzionali)
 \appendix
@@ -294,13 +321,13 @@ Lo \textit{scope} della scansione viene definito dal cliente e, insieme al repar
 \begin{figure}
 \centering
 \includegraphics[scale=0.329]{images/qualys_reports.png}
-    \caption{\textit{Reports}. Questa sezione permette di visualizzare i report generati dalle scansioni oppure generarne manualmente. È possibile anche personalizzare i \textit{template} con i quali vengono generati i report.}
+    \caption{\textit{Reports}. Questa sezione permette di visualizzare i report generati dalle scansioni oppure generarli manualmente. È possibile anche personalizzare i \textit{template} con i quali vengono generati i report.}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[scale=0.425]{images/qualys_remediation.png}
-    \caption{\textit{Remediation}. Visualizza la lista, con le relative scadenze di risoluzione, delle vulnerabilità trovate e non ancora risolte.}
+    \caption{\textit{Remediation}. Visualizza la lista, con le relative scadenze di risoluzione, delle vulnerabilità trovate nelle scansioni e non ancora risolte.}
 \end{figure}
 
 \begin{figure}
