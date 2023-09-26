@@ -247,7 +247,7 @@ comparativi. Questi documenti prendono in considerazione due o più periodi nei 
 Infine tutti i documenti redatti, ad eccezione del \textit{technical report}, vengono discussi insieme al committente e al responsabile del reparto IT.
 
 \chapter{Caso di studio: analisi delle vulnerabilità di una rete aziendale}
-In questo capitolo si espone un caso di studio reale di \textit{vulnerability assessment}, eseguito per un'azienda metalmeccanica che produce componenti per il settore dell'Automotive.
+In questo capitolo si espone un caso di studio reale di \textit{vulnerability assessment} eseguito per un'azienda metalmeccanica che produce componenti per il settore dell'Automotive.
 
 La scansione è stata eseguita gennaio e febbraio 2023 e fa parte della commessa richiesta dall'azienda per la valutazione della sicurezza della rete, che prevede, oltre al \textit{vunerability assessment}, attività di \textit{penetration test} e campagne di \textit{phishing}\footnote{k}. 
 
@@ -284,20 +284,40 @@ Stando a quanto dichiarato da questo documento preliminare, l'infrastruttura in 
 Queste informazioni sono utili per rendere le scansioni più accurate e per avere un contesto, seppur superficiale, della situazione.
 
 \section{Configurazione della scansione}
-\paragraph{Scansione interna}  Prima ancora di configurare e schedulare le scansioni c'è bisogno di fare il \textit{deploy} della \textit{virtual appliance}, ovvero quella macchina virtuale che sarà installata nell'ambiente aziendale e avrà accesso a tutti i \textit{target} in modo da poter comunicare con loro. Nel nostro scenario la macchina virtuale risiederà nella rete 192.168.1.0/24 con un indirizzo IP configurato staticamente (Figura \ref{fig:qualys_appliance}).
+\paragraph{Scansione interna} Prima ancora di configurare e schedulare le scansioni c'è bisogno di fare il \textit{deploy} della \textit{virtual appliance}, ovvero quella macchina virtuale che sarà installata nell'ambiente aziendale e avrà accesso a tutti i \textit{target} in modo da poter comunicare con loro. Nel nostro scenario la macchina virtuale risiederà nella rete 192.168.1.0/24 con un indirizzo IP configurato staticamente (Figura \ref{fig:qualys_appliance}).
 
 A questo punto è necessario configurare le opportune regole di firewall per fare in modo che la macchina virtuale comunichi, tramite tutte le porte o quelle che verranno specificate in seguito, con i segmenti di rete definiti precedentemente. Per fare questo si potrebbe semplicemente creare una regola che permetta il traffico proveniente dalla rete 192.168.1.0/24 verso tutte le altre. Tuttavia, ciò risulterebbe in una falla di sicurezza da non sottovalutare. Qualsiasi host collegato a tale rete, infatti, sarebbe in grado di accedere a tutta l'infrastruttura. Certamente questa configurazione del firewall sarebbe attiva solamente per il periodo della scansione. Ma si pensi alle conseguenze che potrebbe portare una dimenticanza da parte dei responsabili nella dismissione di questa regola.
 
 La procedura corretta, invece, consiste nel creare una \textit{reservation}\footnote{} dell'indirizzo IP della macchina e configurare quindi una regola che permetta esclusivamente a quell'indirizzo di contattare le altre sottoreti.
 
-Ora è possibile configurare la scansione. 
+Ora è possibile procedere con la configurazione delle scansioni, una per ogni \textit{target}. Nel nostro caso le scansioni non saranno autenticate (sia per quanto riguarda le utenze di dominio sia per servizi, come gestori di database o di sistemi di virtualizzazione), analizzeranno circa 1900 porte TCP e circa 180 porte UDP. Inoltre non eseguiranno un \textit{handshake} TCP completo\footnote{}. La figura \ref{fig:qualys_scan-profile} illustra più nel dettaglio questo profilo di configurazione.
+
+\paragraph{Scansione esterna} Per quanto riguarda la scansione delle interfacce pubbliche dei dispositivi posti ai confini della rete aziendale, la questione della configurazione della \textit{virtual appliance} e la conseguente modifica delle regole di firewall non si pone. La scansione infatti verrà eseguita direttamente dal servizio in cloud. Come si nota dalla figura \ref{fig:qualys_scan_ext} la scansione esterna in questione è stata effettuata dal server di proprietà di Qualys con indirizzo pubblico 64.39.106.5. Il profilo di scansione utilizzato è lo stesso delle scansioni interne.
 
 \begin{figure}[h]
 \centering
-    \includegraphics{images/qualys_appliance.png}
+    \includegraphics{images/qualys_appliance2.png}
     \caption{Configurazione LAN della \textit{virtual appliance}.}
     \label{fig:qualys_appliance}
 \end{figure}
+
+\begin{figure}[!]
+\centering
+    \includegraphics[scale=0.39]{images/qualys_scan-profile.png}
+    \caption{Configurazione del profilo di scansione.}
+    \label{fig:qualys_scan-profile}
+\end{figure}
+
+\begin{figure}[!]
+\centering
+    \includegraphics[scale=0.645]{images/qualys_scan_ext.png}
+    \caption{Scansione esterna.}
+    \label{fig:qualys_scan_ext}
+\end{figure}
+
+\section{Analisi dei report}
+
+
 
 
 %% Fine dei capitoli normali, inizio dei capitoli-appendice (opzionali)
