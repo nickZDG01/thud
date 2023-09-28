@@ -249,7 +249,18 @@ Infine tutti i documenti redatti, ad eccezione del \textit{technical report}, ve
 \chapter{Caso di studio: analisi delle vulnerabilità di una rete aziendale}
 In questo capitolo si espone un caso di studio reale di \textit{vulnerability assessment} eseguito per un'azienda metalmeccanica che produce componenti per il settore dell'Automotive.
 
-La scansione è stata eseguita gennaio e febbraio 2023 e fa parte della commessa richiesta dall'azienda per la valutazione della sicurezza della rete, che prevede, oltre al \textit{vunerability assessment}, attività di \textit{penetration test} e campagne di \textit{phishing}\footnote{k}. 
+La scansione è stata eseguita gennaio e febbraio 2023 e fa parte della commessa richiesta dall'azienda per la valutazione della sicurezza della rete, che prevede, oltre al \textit{vunerability assessment}, attività di \textit{penetration test} e campagne di \textit{phishing}\footnote{k}.
+
+\section{Metriche}
+Le vulnerabilità di un sistema informatico sono classificate in base alla loro gravità e quindi al pericolo che esse possono comportare a tale sistema, in modo da poter prioritizzare gli interventi di risouzione.
+
+Il livello di \textit{severity} è calcolato secondo le seguenti metriche e viene espresso attraverso il CVSS \textit{score}:
+
+\begin{itemize}
+    \item 
+\end{itemize}
+
+\footnote{Il \textit{Common Vulnerability Scoring System}, originariamente sviluppato dal \textit{National Infrastructure Advisory Council}, è un sistema standardizzato che assegna un punteggio da zero a dieci (severità più alta) alle vulnerabilità}
 
 \section{Strumentazione}
 Esistono un gran numero di \textit{vulnerability scanning tools} che differiscono, oltre che per il prezzo , in base alle tecnologie che supportano (oltre a Windows, Linux e macOS potrebbero esserci sistemi insoliti per i quali lo scanner non è stato programmato), se sono dedicati anche alle \textit{web applications scans}  e in base ad eventuali configurazioni come il grado di automazione e la possibilità di schedulare le scansioni. La maggior parte dei tool di scansione però consiste in software accessibili da piattaforme in cloud attraverso il browser.
@@ -286,11 +297,11 @@ Queste informazioni sono utili per rendere le scansioni più accurate e per aver
 \section{Configurazione della scansione}
 \paragraph{Scansione interna} Prima ancora di configurare e schedulare le scansioni c'è bisogno di fare il \textit{deploy} della \textit{virtual appliance}, ovvero quella macchina virtuale che sarà installata nell'ambiente aziendale e avrà accesso a tutti i \textit{target} in modo da poter comunicare con loro. Nel nostro scenario la macchina virtuale risiederà nella rete 192.168.1.0/24 con un indirizzo IP configurato staticamente (Figura \ref{fig:qualys_appliance}).
 
-A questo punto è necessario configurare le opportune regole di firewall per fare in modo che la macchina virtuale comunichi, tramite tutte le porte o quelle che verranno specificate in seguito, con i segmenti di rete definiti precedentemente. Per fare questo si potrebbe semplicemente creare una regola che permetta il traffico proveniente dalla rete 192.168.1.0/24 verso tutte le altre. Tuttavia, ciò risulterebbe in una falla di sicurezza da non sottovalutare. Qualsiasi host collegato a tale rete, infatti, sarebbe in grado di accedere a tutta l'infrastruttura. Certamente questa configurazione del firewall sarebbe attiva solamente per il periodo della scansione. Ma si pensi alle conseguenze che potrebbe portare una dimenticanza da parte dei responsabili nella dismissione di questa regola.
+A questo punto è necessario configurare le opportune regole di firewall per fare in modo che la macchina virtuale comunichi, tramite tutte le porte o quelle che verranno specificate in seguito, con i segmenti di rete definiti precedentemente. Per fare questo si potrebbe semplicemente creare una regola che permetta il traffico proveniente dalla rete 192.168.1.0/24 verso tutte le altre. Tuttavia, ciò rappresenterebbe una falla di sicurezza da non sottovalutare. Qualsiasi host collegato a tale rete, infatti, sarebbe in grado di accedere a tutta l'infrastruttura. Certamente questa configurazione del firewall sarebbe attiva solamente per il periodo della scansione. Ma si pensi alle conseguenze che potrebbe portare una dimenticanza da parte dei responsabili nella dismissione di questa regola\footnote{}.
 
 La procedura corretta, invece, consiste nel creare una \textit{reservation}\footnote{} dell'indirizzo IP della macchina e configurare quindi una regola che permetta esclusivamente a quell'indirizzo di contattare le altre sottoreti.
 
-Ora è possibile procedere con la configurazione delle scansioni, una per ogni \textit{target}. Nel nostro caso le scansioni non saranno autenticate (sia per quanto riguarda le utenze di dominio sia per servizi, come gestori di database o di sistemi di virtualizzazione), analizzeranno circa 1900 porte TCP e circa 180 porte UDP. Inoltre non eseguiranno un \textit{handshake} TCP completo\footnote{}. La figura \ref{fig:qualys_scan-profile} illustra più nel dettaglio questo profilo di configurazione.
+Ora è possibile procedere con la configurazione delle scansioni, una per ogni \textit{target}. Nel caso in questione le scansioni non saranno autenticate (sia per quanto riguarda le utenze di dominio sia per servizi, come gestori di database o di sistemi di virtualizzazione) e analizzeranno circa 1900 porte TCP e circa 180 porte UDP. Inoltre non eseguiranno un \textit{handshake} TCP completo\footnote{}. La figura \ref{fig:qualys_scan-profile} illustra più nel dettaglio questo profilo di configurazione.
 
 \paragraph{Scansione esterna} Per quanto riguarda la scansione delle interfacce pubbliche dei dispositivi posti ai confini della rete aziendale, la questione della configurazione della \textit{virtual appliance} e la conseguente modifica delle regole di firewall non si pone. La scansione infatti verrà eseguita direttamente dal servizio in cloud. Come si nota dalla figura \ref{fig:qualys_scan_ext} la scansione esterna in questione è stata effettuata dal server di proprietà di Qualys con indirizzo pubblico 64.39.106.5. Il profilo di scansione utilizzato è lo stesso delle scansioni interne.
 
@@ -316,7 +327,10 @@ Ora è possibile procedere con la configurazione delle scansioni, una per ogni \
 \end{figure}
 
 \section{Analisi dei report}
+Come spiegato nel capitolo precedente, il \textit{tool} di scansione, al termine dell'attività, genera in automatico un \textit{technical report} per ogni \textit{target} analizzato.
 
+Verranno presentati ora i report più significativi ottenuti da questa attività di \textit{assessment}.\newline
+Alcune sezioni di questi documenti possono essere consultate nell'appendice \ref{appendix:b}.
 
 
 
@@ -328,7 +342,7 @@ Ora è possibile procedere con la configurazione delle scansioni, una per ogni \
 \chapter{Interfacce di Qualys}
 \label{appendix:a}
 
-\begin{figure}
+\begin{figure}[h]
 \centering
     \includegraphics[scale=0.329]{images/qualys_dashboard.png}
     \caption{\textit{Dashboard}. Visualizza una panoramica, personalizzabile attraverso \textit{widget}, dei risultati e dell'andamento delle scansioni eseguite.}
@@ -352,19 +366,19 @@ Ora è possibile procedere con la configurazione delle scansioni, una per ogni \
     \caption{\textit{Reports}. Questa sezione permette di visualizzare i report generati dalle scansioni oppure generarli manualmente. È possibile anche personalizzare i \textit{template} con i quali vengono generati i report.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!]
 \centering
 \includegraphics[scale=0.425]{images/qualys_remediation.png}
     \caption{\textit{Remediation}. Visualizza la lista, con le relative scadenze di risoluzione, delle vulnerabilità trovate nelle scansioni e non ancora risolte.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.329]{images/qualys_assets.png}
     \caption{\textit{Assets}. Permette di creare e gestire gli asset e i relativi gruppi che saranno oggetto delle scansioni.}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[!]
     \centering
     \includegraphics[width=1\linewidth]{images/qualys_targets.png}
     \caption{Lista degli \textit{asset groups}. Ogni gruppo è costituito da indirizzi IP singoli, intervalli o \textit{subnet} intere, o da specifici domini.}
@@ -376,6 +390,10 @@ Ora è possibile procedere con la configurazione delle scansioni, una per ogni \
 \includegraphics[scale=0.35]{images/qualys_kb.png}
     \caption{\textit{Knowledgebase}. Questo è il database delle vulnerabilità proprietario di \textit{Qualys} costantemente aggiornato. È possibile, per ogni voce, aggiungere commenti che verranno visualizzati nei report, modificare il livello di criticità delle vulnerabilità o disabilitarle in modo che le scansioni le ignorino.}
 \end{figure}
+
+
+\chapter{\textit{Technical reports}}
+\label{appendix:b}
 
 %% Parte conclusiva del documento; tipicamente per riassunto, bibliografia e/o indice analitico.
 \backmatter
