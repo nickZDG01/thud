@@ -31,6 +31,7 @@
 %% tocbibind: Inserisce nell'indice anche la lista delle figure, la bibliografia, ecc.
 \usepackage{listings}
 \usepackage{minted}
+\usepackage[italian]{cleveref}
 %\usepackage{caption}
 \usepackage[font=small,labelsep=none]{caption}
 
@@ -81,10 +82,10 @@ Il 20 marzo 2023 Ferrari ha comunicato di aver subito un attacco con furto di da
 In conclusione, per salvaguardare l’asset più importante di un’organizzazione, cioè la propria reputazione, è necessario investire nella sicurezza in senso lato, non solo durante la progettazione e l’implementazione dell’infrastruttura informatica ma anche e soprattutto durante il suo ciclo vitale, attuando frequenti attività di monitoraggio e manutenzione\footnote{Lo standard ISO 27001 specifica le norme per stabilire, implementare, mantenere e migliorare in modo continuo un sistema di gestione per la sicurezza delle informazioni nel contesto dell’organizzazione.}. Le principali modalità per soddisfare tali requisiti consistono in periodiche campagne di sensibilizzazione e consapevolezza delle più diffuse minacce informatiche per il personale aziendale e in una altrettanto regolare analisi e valutazione empirica del corrente stato dell’intera infrastruttura di rete in termini di vulnerabilità, configurazione e organizzazione dei dispositivi che compongono la rete aziendale.
 Questo processo prende il nome di \textit{Vulnerability Assessment}.
 
-Questa tesi è strutturata in tre parti. Nella prima parte verrà data una descizione generale del \textit{Vulnerability Assessment}, dei processi che esso implica e dei benefici che esso offre all'azienda. Nella seconda parte viene presentato un documento parziale di un reale \textit{Vulnerability Assessment} arricchito con descrizioni più specifiche. L'ultima sezione vuole offrire alcune soluzioni alle criticità riscontrate nella parte precedente presentando alcune buone pratiche in termini di configurazione e strutturazione della rete.
+Questa tesi è strutturata in tre parti. Nel \cref{cap:part-1} verrà data una descizione generale del \textit{Vulnerability Assessment}, dei processi che esso implica e dei benefici che esso offre all'azienda. Nel \cref{cap:part-2} viene presentato un documento parziale di un reale \textit{Vulnerability Assessment} arricchito con descrizioni più specifiche. Il \cref{cap:part-3} vuole offrire alcune soluzioni alle criticità riscontrate nella parte precedente presentando alcune buone pratiche in termini di configurazione e strutturazione della rete.
 
 
-\chapter{Vulnerability Assessment: cos’è e perché è importante}
+\chapter{Vulnerability Assessment: cos’è e perché è importante} \label{cap:part-1}
 
 Il \textit{vulnerability assessment} (VA) è un processo semi-automatizzato che permette di analizzare un insieme definito di \textit{asset}, ad esempio un’intera \textit{subnet} o un singolo \textit{host} in cerca di debolezze ed errori di configurazione. Lo scopo di un VA è quello di identificare, quantificare, classificare e prioritizzare i possibili difetti di un sistema informatico, ovvero le sue vulnerabilità. Come afferma il \textit{SysAdmin, Audit, Networking and Security Institute}\footnote{Il SANS Institute, fondato negli Stati Uniti nel 1989, fornisce percorsi di educazione e addestramento in materia di sicurezza informatica.} \textit{«vulnerabilities are the gateways by which threats are manifested»}. Le vulnerabilità sono quindi le debolezze attraverso le quali un sistema può essere compromesso.
 
@@ -241,7 +242,7 @@ Al termine delle scansioni lo strumento di analisi genera automaticamente un rep
 
 Il lavoro dell’analista è quindi quello di interpretare, nel modo più oggettivo possibile, i risultati ottenuti riportandoli in un \textit{executive report}, il documento che verrà presentato al cliente. L’analista, oltre a dover discernere ciò che è irrilevante e fuorviante da ciò che necessita realmente di attenzione, deve contestualizzare i risultati restando il più possibile attinente alle informazioni oggettive ottenute dal \textit{technical report}. Il documento, infatti, verrà consultato anche dall’eventuale reparto IT dell’azienda cliente. Dato che solo loro possiedono il preciso quadro generale della propria infrastruttura, sbilanciarsi con certe supposizioni riguardo ad esempio una composizione non ottimale della rete, oppure l’identificazione di una precisa tipologia di dispositivo, rischia di invalidare il lavoro svolto portando a delle conclusioni false e a una cattiva reputazione agli occhi dell’azienda cliente. Non bisogna dimenticare che, a meno di specifiche configurazioni, lo scanner di rete non ha alcuna conoscenza riguardo l’infrastruttura in questione e ogni informazione che rileva in merito alle vulnerabilità è basata esclusivamente dalle corrispondenze che individua tra le risposte dei \textit{target} e quelle contenute in un database limitato.
 
-I risultati delle analisi dovranno essere esposti anche al personale amministrativo. L’analista deve riportare i risultati nell’\textit{executive report} in linguaggio naturale limitando i termini tecnici. Il documento dovrà quindi essere comprensibile da persone non esperte e illustrerà, anche per mezzo di grafici, per ogni \textit{subnet} analizzata, la relativa situazione in termini di numero, criticità e distribuzione delle vulnerabilità. Insieme a una breve descrizione delle criticità più rilevanti, vengono date delle possibili soluzioni per porne rimedio.
+I risultati delle analisi dovranno essere esposti anche al personale amministrativo. L’analista deve riportare i risultati nell’\textit{executive report} in linguaggio naturale limitando i termini tecnici. Il documento dovrà quindi essere comprensibile da persone non esperte e illustrerà, anche per mezzo di grafici, per ogni \textit{subnet} analizzata, la relativa situazione in termini di numero, criticità e distribuzione delle vulnerabilità. Insieme a una breve descrizione delle criticità più rilevanti, ne verranno date delle possibili soluzioni.
 
 \section{Remediation}
 
@@ -258,7 +259,8 @@ comparativi. Questi documenti prendono in considerazione due o più periodi nei 
 
 Infine, al termine di ogni ciclo di \textit{remediation}, tutti i documenti redatti, ad eccezione dei \textit{technical report}, vengono discussi insieme al committente e al responsabile del reparto IT.
 
-\chapter{Caso di studio: analisi delle vulnerabilità di una rete aziendale}
+
+\chapter{Caso di studio: analisi delle vulnerabilità di una rete aziendale} \label{cap:part-2}
 In questo capitolo si espone un caso di studio reale di \textit{vulnerability assessment} eseguito per un'azienda metalmeccanica che produce componenti per il settore dell'Automotive.
 
 La scansione è stata eseguita tra gennaio e febbraio 2023 e fa parte della commessa richiesta dall'azienda per la valutazione della sicurezza della propria rete, che prevede, oltre al \textit{vulnerability assessment}, attività di \textit{penetration test} e campagne di \textit{phishing}\footnote{Attacchi di \textit{phishing} simulati, per email o SMS, che permettono all'azienda di conoscere il livello di consapevolezza dei propri dipendenti in materia di sicurezza informatica.}.
@@ -356,40 +358,54 @@ Ora è possibile procedere con la configurazione delle scansioni, una per ogni \
 
 \paragraph{Scansione esterna} Per quanto riguarda la scansione delle interfacce pubbliche dei dispositivi posti ai confini della rete aziendale, la questione della configurazione della \textit{virtual appliance} e la conseguente modifica delle regole di firewall non si pone. La scansione infatti verrà eseguita direttamente dal servizio in cloud. Come si nota dalla figura \ref{fig:qualys_scan_ext} la scansione esterna in questione è stata effettuata dal server di proprietà di Qualys con indirizzo pubblico 64.39.106.5. Il profilo di scansione utilizzato è lo stesso delle scansioni interne.
 
-\pagebreak
 
-\begin{figure}[h]
+\begin{figure}[t]
 \centering
     \includegraphics[scale=0.7]{images/qualys_appliance2.png}
     \caption{: Configurazione LAN della \textit{virtual appliance}.}
     \label{fig:qualys_appliance}
 \end{figure}
 
-\begin{figure}[!]
+\begin{figure}[t]
 \centering
     \includegraphics[scale=0.35]{images/qualys_scan-profile.png}
     \caption{: Configurazione del profilo di scansione.}
     \label{fig:qualys_scan-profile}
 \end{figure}
 
-\begin{figure}[!]
+\begin{figure}[t]
 \centering
     \includegraphics[scale=0.6]{images/qualys_scan_ext.png}
     \caption{: Scansione esterna.}
     \label{fig:qualys_scan_ext}
 \end{figure}
 
-\pagebreak
 
 \section{Analisi dei report}
 Come spiegato nel capitolo precedente, il \textit{tool} di scansione, al termine dell'attività, genera in automatico un \textit{technical report} per ogni \textit{target} analizzato.
 
 Verranno presentati ora i report più significativi ottenuti da questa attività di \textit{assessment}.\newline
-Alcune sezioni di questi documenti possono essere consultate nell'appendice \ref{appendix:reports}
 
 \subsection{Target FODT-EXT-01} \textbf{\textit{Figura \ref{fig:fodt-ext-01_1}}}
 
-Su un totale di quattro host, sono state rilevate 92 vulnerabilità sui due host attivi. Il numero di vulnerabilità può sembrare alto, tuttavia in questo numero Qualys include anche le \textit{Information gathered} (che in questo caso sono 83), ovvero tutte le informazioni generiche visibili che il \textit{tool} è riuscito a ricavare dagli apparati da un'analisi superficiale, ad esempio i servizi attivi. Dato che queste informazioni non corrispondono a vere e proprie vulnerabilità in queste analisi verranno prese in considerazione solamente le vulnerabilità categorizzate come "\textit{Confirmed}".
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-EXT-01_1.png}
+    \caption{}
+    \label{fig:fodt-ext-01_1}
+\end{figure}
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-EXT-01_2.png}
+    \caption{}
+    \label{fig:fodt-ext-01_2}
+\end{figure}
+
+
+Su un totale di quattro host, sono state rilevate 92 vulnerabilità sui due host attivi. Il numero di vulnerabilità può sembrare alto, tuttavia in questo numero Qualys include anche le \textit{Information gathered} (che in questo caso sono 83), ovvero tutte le informazioni generiche visibili che il \textit{tool} è riuscito a ricavare dagli apparati da un'analisi superficiale, ad esempio i servizi attivi. Dato che queste informazioni non corrispondono a vere e proprie vulnerabilità in queste analisi verranno prese in considerazione solamente le vulnerabilità categorizzate come \textit{Confirmed}.
 
 In questo caso vi sono quattro vulnerabilità di livello di severità tre e di livello due e una di livello uno. Non sono state rilevate vulnerabilità gravi.
 \\ Entrambi gli host, probabilmente due firewall di due connettività diverse, presentano vulnerabilità riguardanti protocolli di crittografia e comunicazione sicura a livello di trasporto SSL/TLS. In particolare il protocollo TLS nella versione 1.0 e 1.1 è obsoleto e formalmente deprecato dal 31 marzo 2021\footnote{RFC 8996.}. Lo scanner ha rilevato che i due host supportano l'utilizzo di tali protocolli.
@@ -405,6 +421,23 @@ La figura \ref{fig:fodt-ext-01_2} mostra i dettagli del risultato di tale rileva
 
 \subsection{Target FODT-INT-01} \textbf{\textit{Figura \ref{fig:fodt-int-01_1}}} \label{fodt-int-01}
 
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-01_1.png}
+    \caption{}
+    \label{fig:fodt-int-01_1}
+\end{figure}
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-01_2.png}
+    \caption{}
+    \label{fig:fodt-int-01_2}
+\end{figure}
+
+
 Tra i 254 possibili host di questa rete ne sono risultati attivi 8.
 Le due vulnerabilità più gravi sono state rilevate negli host 192.168.2.4 e 192.168.2.6. Questi host espongono un servizio di accesso remoto con una configurazione insicura. Il servizio in questione è il VNC (\textit{Virtual Network Computing}). Questo applicativo è costituito da una componente server, installata sul computer remoto che si vuole gestire, e una client, che risiede sui dispositivi che hanno bisogno di accedere all'host remoto. Se il servizio è configurato, come in questo caso, in modo da permettere accessi non autenticati, è possibile, per qualsiasi utente che riesca a collegarsi, accedere al computer "server" senza bisogno di credenziali (Figura \ref{fig:fodt-int-01_2}).
 \\ L’host 192.168.2.254 (probabilmente un router o switch) presenta la maggior parte delle vulnerabilità trovate in questo target. In particolare viene segnalata l’esposizione di servizi di connessione remota SSH (\textit{Secure Shell}) in versione obsoleta e Telnet. Entrambi i protocolli permettono di collegarsi e interagire con un host remoto mediante linea di comando con la sostanziale differenza che Telnet non implementa la cifratura della connessione\footnote{Telnet fu sviluppato originariamente tra gli anni '70 e '80 per essere utilizzato in reti fidate governative e istituzionali}. Nel caso in cui l'host in questione fosse un apparato di rete e un amministratore di sistema volesse accedervi, sarebbe possibile per una persona terza, appartenente alla stessa rete, intercettare, ad esempio tramite un attacco ARP \textit{poisoning}\footnote{Una figura terza, che risiede nella stessa sottorete, maschera l'indirizzo MAC del gateway col proprio indirizzo fisico. In questo modo le connessioni con l'esterno o con altre sottoreti passeranno per il falso gateway così da poter essere intercettate e "sniffate".}, la connessione e vedere in chiaro le credenziali di accesso. A causa di questa intrinseca debolezza di Telnet, si predilige l'uso del protocollo SSH.
@@ -416,23 +449,62 @@ La \textit{remediation} consiste nel considerare la necessità di esporre questi
 
 \subsection{Target FODT-INT-01A} \textbf{\textit{Figura \ref{fig:fodt-int-01a_1}}}
 
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-01a_1.png}
+    \caption{}
+    \label{fig:fodt-int-01a_1}
+\end{figure}
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-01a_2.png}
+    \caption{}
+    \label{fig:fodt-int-01a_2}
+\end{figure}
+
+
 L’analisi di questo target ha rilevato una grande quantità di vulnerabilità, soprattutto di criticità media.
 Le risultanze più occorrenti riguardano il servizio SNMP il quale risulta abilitato in scrittura e configurato con una \textit{community string}\footnote{Striga di caratteri, numeri e simboli, simile a una password e serve al servizio SNMP per interrogare il dispositivo gestito.} standard. Tale servizio permette di gestire e monitorare componenti dell’infrastruttura di rete da remoto e in particolare è possibile per chiunque conosca la \textit{community string} modificare e alterare le configurazioni degli apparati di rete, dall'orario di spegnimento di un NAS al settaggio della velocità delle ventole di un server.
 
 Sono stati rilevati inoltre vari host (tra i quali presumibilmente server e \textit{workstations}) con protocolli di sicurezza deboli (TLS v1.0 e v1.1). Un attaccante può essere in grado di intercettare il traffico e decifrarlo. Si proceda con la riconfigurazione e l’aggiornamento del servizio SSL/TLS.
 
-Gli asset con indirizzo IP 192.168.1.9, 192.168.1.10 e 192.168.1.91 espongono il servizio FTP\footnote{Il \textit{File Transfer Protocol} è un protocollo applicativo sviluppato per l'invio e la ricezione di file attraverso la rete. È spesso utilizzato nella configurazione e manutenzione di web server con interfaccia a linea di comando.} configurato in modo da permettere accessi non autenticati. In particolare è stata rilevata nell'host 192.168.1.9 la presenza di una \textit{backdoor} che permette un accesso con priviegi di amministratore senza bisogno di credenziali.
+Gli asset con indirizzo IP 192.168.1.9, 192.168.1.10 e 192.168.1.91 espongono il servizio FTP\footnote{Il \textit{File Transfer Protocol} è un protocollo applicativo sviluppato per l'invio e la ricezione di file attraverso la rete. È spesso utilizzato nella configurazione e manutenzione di web server con interfaccia a linea di comando.} configurato in modo da permettere accessi non autenticati. In particolare è stata rilevata nell'host 192.168.1.9 la presenza di una \textit{backdoor} che permette un accesso con privilegi di amministratore senza bisogno di credenziali.
 
-Sono stati rilevati quattro host (192.168.1.55, 192.168.1.114, 192.168.1.152, 192.168.1.246) con sistemi operativi obsoleti come Windows 7 e Windows Server 2008  (Figura \ref{fig:fodt-int-01a_2}). Questi sistemi operativi sono ormai deprecati e non ricevono più il supporto ufficiale attraverso \textit{patch} di sicurezza di Microsoft\footnote{Il 14 gennaio 2020 è terminato il supporto per entrambi i sistemi.}. Sono inoltre noti vettori di numerosi attacchi alla confidenzialità, integrità e disponibilità della rete nella quale risiedono. Alcuni esempi sono gli attacchi BlueKeep (CVE-2019-0708) ed EternalBlue (CVE-2017-0144). Tali attacchi rigurdano il protocollo di accesso remoto RDP e il protocollo di condivisione di file SMB rispettivamente.
+Sono stati rilevati quattro host (192.168.1.55, 192.168.1.114, 192.168.1.152, 192.168.1.246) con sistemi operativi obsoleti come Windows 7 e Windows Server 2008  (Figura \ref{fig:fodt-int-01a_2}). Questi sistemi operativi sono ormai deprecati e non ricevono più il supporto ufficiale attraverso \textit{patch} di sicurezza di Microsoft\footnote{Il 14 gennaio 2020 è terminato il supporto per entrambi i sistemi.}. Sono inoltre noti vettori di numerosi attacchi alla confidenzialità, integrità e disponibilità della rete nella quale risiedono. Alcuni esempi sono gli attacchi BlueKeep (CVE-2019-0708) ed EternalBlue (CVE-2017-0144). Tali attacchi riguardano il protocollo di accesso remoto RDP e il protocollo di condivisione di file SMB rispettivamente.
 \\ Entrambi gli \textit{exploit} sfruttano falle nell'implementazione dei protocolli che permettono l'esecuzione di codice arbitrario da remoto. Inoltre, dato che SMB è un servizio usato molto comunemente per permettere ai sistemi collegati in rete di condividere file e informazioni, qualsiasi virus che sfrutti l'\textit{exploit} EternalBlue può essere capace di diffondersi autonomamente nell'intera rete.  
 
-Alcuni asset come 192.168.1.226, 192.168.1.228 e 192.168.1.234 (probabilmente schede di gestione di server\footnote{Componente fisico all'interno o all'esterno di un server, con propria scheda di rete, che riceve e risponde alle \textit{query} di un client riguardanti i parametri di stato del server col quale si interfacciano.}) presentano un firmware obsoleto (versioni precedenti a Dell EMC iDRAC 4.20.20.20). Questa versione del firmware possiede una vulnerabilità della tipologia \textit{Path Traversal}\footnote{Tecnica che permette all'attaccante, ad esempio di un sito web, di raggiungere cartelle e file all'esterno della cartella root del sito e accedere senza autorizzazione a file di configurazione del we server.} che permette ad un attaccante non autenticato di ottenere informazioni riservate e potenziamente di iniettare codice malevolo da remoto.
+Alcuni asset come 192.168.1.226, 192.168.1.228 e 192.168.1.234 (probabilmente schede di gestione di server\footnote{Componente fisico all'interno o all'esterno di un server, con propria scheda di rete, che riceve e risponde alle \textit{query} di un client riguardanti i parametri di stato del server col quale si interfacciano.}) presentano un firmware obsoleto (versioni precedenti a Dell EMC iDRAC 4.20.20.20). Questa versione del firmware possiede una vulnerabilità della tipologia \textit{Path Traversal}\footnote{Tecnica che permette all'attaccante, ad esempio di un sito web, di raggiungere cartelle e file all'esterno della cartella root del sito e accedere senza autorizzazione a file di configurazione del we server.} che permette ad un attaccante non autenticato di ottenere informazioni riservate e potenzialmente di iniettare codice malevolo da remoto.
 Si segnala che questi ultimi asset sono molto sensibili dato che si interfacciano direttamente coi server che gestiscono. Si proceda quindi con una tempestiva \textit{remediation}.
 
 Tra le altre vulnerabilità rilevate che permettono il cosiddetto \textit{information gathering} si segnala la presenza (es. 192.168.1.239, 192.168.1.243) del servizio netBIOS che permette l’accesso senza autorizzazione ad informazioni potenzialmente riservate.
 Si proceda con il \textit{patching} e la riconfigurazione dei servizi più esposti tenendo anche in considerazione la disattivazione dei servizi non essenziali.
 
+
 \subsection{Target FODT-INT-06} \label{fodt-int-06} \textbf{\textit{Figura \ref{fig:fodt-int-06_1}}}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-06_1.png}
+    \caption{}
+    \label{fig:fodt-int-06_1}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-06_2.png}
+    \caption{}
+    \label{fig:fodt-int-06_2}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-06_3.png}
+    \caption{}
+    \label{fig:fodt-int-06_3}
+\end{figure}
+
 
 L’analisi di questo target sembra aver rilevato molti dispositivi secondari come telefoni IP e schede di gestione (Figura \ref{fig:fodt-int-06_2}), alcuni dispositivi Linux, alcune postazioni Windows, e probabilmente dei macchinari industriali (es. 192.168.7.44).
 L’analisi ha rilevato molte vulnerabilità di criticità media e alcune di severità alta.
@@ -447,6 +519,28 @@ Si segnala inoltre che i dispositivi Windows 192.168.7.30 e 192.168.7.142 presen
 Il target in questione possiede una scarsa omogeneità in termini di tipologia di asset e dispositivi. Oltre alla disattivazione dei servizi esposti non strettamente necessari, si consiglia fortemente di suddividere questa rete in più sottoreti più omogenee, così da prevenire al meglio la diffusione di un possibile attacco da dispositivi secondari a infrastrutture più importanti.
 
 \subsection{Target FODT-INT-13} \label{fodt-int-13} \textbf{\textit{Figura \ref{fig:fodt-int-13_1}}}
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-13_1.png}
+    \caption{}
+    \label{fig:fodt-int-13_1}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-13_2.png}
+    \caption{}
+    \label{fig:fodt-int-13_2}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-13_3.png}
+    \caption{}
+    \label{fig:fodt-int-13_3}
+\end{figure}
 
 L’analisi di questo target ha rilevato una grande quantità di vulnerabilità di livello medio e significative vulnerabilità di severità critica. Il target è costituito in prevalenza da dispositivi Windows.
 
@@ -463,12 +557,28 @@ Il target in questione necessita di \textit{remediation} urgente (in prevalenza 
 
 \subsection{Target FODT-INT-31} \textbf{\textit{Figura \ref{fig:fodt-int-31_1}}}
 
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-31_1.png}
+    \caption{}
+    \label{fig:fodt-int-31_1}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=1\linewidth]{images/FODT-INT-31_2.png}
+    \caption{}
+    \label{fig:fodt-int-31_2}
+\end{figure}
+
+
 L’analisi di questo target ha rilevato un grande quantitativo di vulnerabilità di livello medio e significative vulnerabilità di severità critica. Il target è costituito in prevalenza da dispositivi Windows.
 
 Come per il target FODT-INT-13 la principale criticità trovata riguarda l’utilizzo di sistemi operativi deprecati e obsoleti in vari host come Windows XP e Windows 7.
 Gli host 192.168.31.6, 192.168.31.9 e 192.168.31.24, ad esempio, presentano molte vulnerabilità critiche note nei protocolli di condivisione di dati SMB, accesso remoto RDP e di sicurezza SSL/TLS.
 
-Gli host 192.168.31.7, 192.168.31.8, 192.168.31.20 e 192.168.31.22 risultano essere database SQL (Figura \ref{fig:fodt-int-31_2}). Tutti gli asset espongono in rete, precisamente attraverso la porta 1433, un servizio che permette di interfacciarsi con il database, vulnerabile. In particolare la vulnerabilità appartine alla categoria del \textit{privilege escalation}, ovvero permette ad un utente o ad un'applicazione concepita inizialmente per avere accessi e privilegi limitati di ottenere accesso non autorizzato a risorse.
+Gli host 192.168.31.7, 192.168.31.8, 192.168.31.20 e 192.168.31.22 risultano essere database SQL (Figura \ref{fig:fodt-int-31_2}). Tutti gli asset espongono in rete, precisamente attraverso la porta 1433, un servizio che permette di interfacciarsi con il database, vulnerabile. In particolare la vulnerabilità appartiene alla categoria del \textit{privilege escalation}, ovvero permette ad un utente o ad un'applicazione concepita inizialmente per avere accessi e privilegi limitati di ottenere accesso non autorizzato a risorse.
 
 Anche questo target necessita di \textit{remediation} urgente. È necessario procedere con la messa in sicurezza degli asset che espongono servizi SQL server e l'aggiornamento dei sistemi obsoleti.
 
@@ -479,18 +589,19 @@ Un’attenzione particolare va posta sull’architettura della rete, volta a ver
 
 Considerare inoltre, a seguito di una scrupolosa analisi, di disabilitare, soprattutto nei dispositivi secondari, i servizi esposti non strettamente necessari, ad esempio servizi di accesso e gestione remota come VNC, RDP o SNMP, così da limitare il più possibile lo spazio di manovra di un possibile attaccante.
 
-\chapter{Metodi di \textit{remediation}}
+
+\chapter{Metodi di \textit{remediation}} \label{cap:part-3}
 
 Verranno ora descritte possibili soluzioni alle problematiche riscontrate nelle precedenti analisi e alcune \textit{best practices} al fine di irrobustire la sicurezza dell'infrastruttura di rete aziendale.
 
 \section{Compartimentazione della rete}
 
-Segmentare una rete significa suddividere logicamente il complesso dell'infrastruttura di rete in più reti distinte fra di loro. Invece, di avere un'unica grande rete, ad esempio di classe B\footnote{}, si creano \textit{subnet} più piccole ognuna dedicata ad un proprio ambito, come la rete delle \textit{workstations}, dei server, di \textit{management} o dei backup. In questo caso il termine \textit{subnet} non identifica necessariamente un indirizzamento derivato da una rete con \textit{subnet mask} minore\footnote{Ad esempio la rete 192.168.80.0/20 è sottorete di 192.168.0.0/16.}. La compartimentazione di un'infrastruttura informatica può essere eseguita anche con un approccio "orizzontale", ovvero tramite l'utilizzo di identificatori di rete diversi ma con stessa \textit{subnet mask}, ad esempio 192.168.5.0/24, 192.168.10.0/24 e 192.168.15.0/24.
+Segmentare una rete significa suddividere logicamente il complesso dell'infrastruttura di rete in più reti distinte fra di loro. Invece, di avere un'unica grande rete, ad esempio di classe B\footnote{Gruppo di indirizzamenti IP da 128.0.0.0 a 191.255.0.0 con \textit{subnet mask} fissa a 255.255.0.0, quindi con 16 bit riservati alla rete e 16 per gli host.}, si creano \textit{subnet} più piccole ognuna dedicata ad un proprio ambito, come la rete delle \textit{workstations}, dei server, di \textit{management} o dei backup. In questo caso il termine \textit{subnet} non identifica necessariamente un indirizzamento derivato da una rete con \textit{subnet mask} minore\footnote{Ad esempio la rete 192.168.80.0/20 è sottorete di 192.168.0.0/16.}. La compartimentazione di un'infrastruttura informatica può essere eseguita anche con un approccio "orizzontale", ovvero tramite l'utilizzo di identificatori di rete diversi ma con stessa \textit{subnet mask}, ad esempio 192.168.5.0/24, 192.168.10.0/24 e 192.168.15.0/24.
 
 La segmentazione di rete permette di gestire più opportunamente e organizzare gli asset in specifiche sottoreti in base alla propria affinità con lo scopo che essi ricoprono. Questo permette di implementare logiche di controllo degli accessi tra le sottoreti in modo da rispecchiare le \textit{policy} definite dall'azienda insieme agli eventuali consulenti IT. Ad esempio si potrebbe stabilire che due reparti appartenenti a due reti diverse non possano interagire oppure solo uno dei due può accedere alle risorse dell'altro, è possibile far comunicare specifici host di una rete con uno o più specifici server appartenenti alla propria rete isolata, o ancora è possibile implementare una rete dedicata completamente a macchinari industriali o alla gestione e manutenzione degli apparati di rete, come switch, NAS, server o access point.
 
 Il dispositivo che si occupa di gestire le sottoreti e il relativo traffico è il firewall. Esso permette di creare regole che consentono o meno il traffico in entrata su un'interfaccia e in uscita su un'altra a seconda dell'indirizzo IP di sorgente e destinazione ma anche a seconda del servizio (quindi della porta) che si tenta di contattare. Si può decidere ad esempio che la rete delle postazioni di lavoro possa accedere al \textit{file server} solamente attraverso il servizio SMB, oppure che la rete guest possa esclusivamente uscire in internet attraverso i protocolli HTTP, HTTPS e servizi mail SMTP e SMTPS.
-\\ Il firewall, quindi, offre una gestione ottimale e centralizzata delle interfacce di rete e perciò, in una rete aziendale, il dispositivo che dovrebbe fare \textit{routing} è appunto il firewall. Alcuni firewall operano a livello applicativo del modello ISO/OSI e sono quindi in grado di analizzare e filtrare il traffico tra le sottoreti e da Internet (più precisamnete è in grado di leggere e analizzare il \textit{payload} di ogni pacchetto che transita tramite esso).
+\\ Il firewall, quindi, offre una gestione ottimale e centralizzata delle interfacce di rete e perciò, in una rete aziendale, il dispositivo che dovrebbe fare \textit{routing} è appunto il firewall. Alcuni firewall operano a livello applicativo del modello ISO/OSI e sono quindi in grado di analizzare e filtrare il traffico tra le sottoreti e da Internet (più precisamente è in grado di leggere e analizzare il \textit{payload} di ogni pacchetto che transita tramite esso).
 
 Una corretta segmentazione, quindi, oltre a permettere una gestione più organizzata e intuitiva della rete, consente di isolare l'eventuale attacco limitando il numero di dispositivi compromessi. Ciò che si vuole evitare, infatti, sono i cosiddetti movimenti laterali di un attaccante all'interno della rete, ovvero la possibilità per l'attaccante di muoversi di host in host vulnerabile verso obiettivi sempre più sensibili. Si prenda come esempio una rete nella quale risiedono anche dispositivi \textit{Internet of Things}. Questi asset solitamente necessitano di una configurazione che permetta di essere raggiunti da remoto e quindi di essere esposti fuori dalla rete locale. Spesso questi dispositivi secondari non sono mantenuti a dovere, ed essendo per loro natura vulnerabili (in quanto dispositivi ancora relativamente recenti) vengono presi frequentemente di mira. Se all'interno della loro stessa rete risiedono anche dispositivi di produzione come \textit{workstations} e macchinari industriali allora è logico aspettarsi che prima o poi tali dispositivi possano essere compromessi mediante un attacco originato da asset secondari, siano essi dispositivi IoT, stampanti o telefoni IP.
 
@@ -500,7 +611,7 @@ Al \textit{target} FODT-INT-06 (Paragrafo \ref{fodt-int-06}), che fa riferimento
 
 Un'altra sottorete pericolosamente esposta ad attacchi è la 192.168.30.0/24 (\textit{Target} FODT-INT-13, Paragrafo \ref{fodt-int-13}). In questa rete risiedono infatti sia sistemi operativi obsoleti come Windows XP e Windows 7, che dispositivi NAS di archiviazione. Potenzialmente, quindi, basterebbe che un utente distratto o poco consapevole aprisse un allegato di una mail di \textit{phishing} per compromettere anche i sistemi di backup (Nel caso in cui tali dispositivi fossero dedicati a queste operazioni).
 
-Le sottoreti vengono configurate sul firewall sotto forma di interfacce virtuali. Oltre all'identificatore di rete (ad esempio 172.16.20.0/24) viene associato anche il cosiddetto VLAN\footnote{} ID, ovvero un numero da 1 a 4096. Questo identificativo, che viene aggiunto al \textit{frame} Ethernet, permette alle rispettive sottoreti di essere propagate anche sugli switch. Essi, essendo dispositivi appartenenti al livello 2 nello stack ISO/OSI, non permettono il routing dei pacchetti e pertanto utilizzano tale ID per decidere quali client possono parlarsi fra di loro. Di base qualsiasi host appartenente ad una specifica VLAN è autorizzato a comunicare con tutti gli host che risiedono nella VLAN con stesso ID.
+Le sottoreti vengono configurate sul firewall sotto forma di interfacce virtuali, chiamate VLAN. Oltre all'identificatore di rete (ad esempio 172.16.20.0/24) viene associato anche il cosiddetto VLAN ID, ovvero un numero da 1 a 4096. Questo identificativo, che viene aggiunto al \textit{frame} Ethernet, permette alle rispettive sottoreti di essere propagate anche sugli switch. Essi, essendo dispositivi appartenenti al livello 2 nello stack ISO/OSI, non permettono il routing dei pacchetti e pertanto utilizzano tale ID per decidere quali client possono parlarsi fra di loro. Di base qualsiasi host appartenente ad una specifica VLAN è autorizzato a comunicare con tutti gli host che risiedono nella VLAN con stesso ID.
 
 L'associazione fra dispositivo e VLAN avviene fisicamente attraverso il collegamento con una porta dello switch. Ogni porta può essere configurata per far passare una specifica VLAN (ovvero \textit{frame} con quello specifico ID) oppure qualsiasi VLAN (queste porte sono definite di \textit{trunk} e solitamente vengono attivate per il collegamento con un altro switch o un qualsiasi dispositivo che permetta l'inoltro dei \textit{frame}).
 
@@ -540,27 +651,27 @@ Come spiegato in precedenza, ogni servizio o programma in ascolto su un sistema 
 
 La prima accortezza da avere è verificare che sul firewall non vi siano regole che permettano di instaurare connessioni dall'esterno del perimetro aziendale al suo interno, tramite qualsiasi servizio. Nel caso in cui ci fosse invece reale bisogno di concedere l'accesso a un sistema interno della rete, ad esempio un cliente che ha necessità di accedere ad un server FTP interno, sarà opportuno configurare la regola in modo da consentire le connessioni esclusivamente a determinati IP pubblici che andranno periodicamente verificati e, se non più validi (nel caso in cui ad esempio il sistema remoto cambiasse il proprio indirizzo pubblico) esclusi.
 
-Se invece si volesse consapevolmente offrire dei servizi su internet, ad esempio attraverso dei mail server proprietari, la sceta migliore e più sicura consiste nel collocare i sistemi che espongono tali servizi in una DMZ, ovvero DeMilitarized Zone. Questa è a tutti gli effetti un'interfaccia di rete aggiuntiva offerta dal firewall e permette di separare completamente il traffico di rete dei sistemi esposti in internet da quello della rete LAN privata interna all'azienda. Sul firewall verrà quindi configurata una regola che inoltra le connessioni provenienti da internet verso l'interfaccia in questione tramite le porte corrispondenti ai servizi che si vogliono esporre.
+Se invece si volesse consapevolmente offrire dei servizi su internet, ad esempio attraverso dei mail server proprietari, la scelta migliore e più sicura consiste nel collocare i sistemi che espongono tali servizi in una DMZ, ovvero DeMilitarized Zone. Questa è a tutti gli effetti un'interfaccia di rete aggiuntiva offerta dal firewall e permette di separare completamente il traffico di rete dei sistemi esposti in internet da quello della rete LAN privata interna all'azienda. Sul firewall verrà quindi configurata una regola che inoltra le connessioni provenienti da internet verso l'interfaccia in questione tramite le porte corrispondenti ai servizi che si vogliono esporre.
 
-Per permettere la fruizione dei servizi erogati dalla intranet aziendale come l'accesso alle cartelle di rete condivise o ai server interni anche da parte di dipedenti, fornitori o clienti che risiedono su reti remote, è necessaria una VPN, in particolare è necessaria la configurazione di una SSL VPN. Tale tipologia di VPN si basa sull'autenticazione da parte degli utenti su un client installato sulla propria postazione e configurato in modo da dirottare e inoltrare il traffico in uscita () verso un gateway specifico che solitamente coincide con il firewall dell'azienda. Così facendo i pacchetti di rete vengono crittografati a partire dal livello di trasporto e alla postazione connessa viene assegnato un indirizzo IP appartenente alla sottorete degli utenti SSL VPN. Sarà poi cura degli amministratori di rete concedere ai singoli utenti o a quest'ultima \textit{subnet} l'accesso ai vari servizi interni. 
+Per permettere la fruizione dei servizi erogati dalla intranet aziendale come l'accesso alle cartelle di rete condivise o ai server interni anche da parte di dipendenti, fornitori o clienti che risiedono su reti remote, è necessaria una VPN, in particolare è necessaria la configurazione di una SSL VPN. Tale tipologia di VPN si basa sull'autenticazione da parte degli utenti su un client installato sulla propria postazione e configurato in modo da dirottare e inoltrare il traffico in uscita () verso un gateway specifico che solitamente coincide con il firewall dell'azienda. Così facendo i pacchetti di rete vengono crittografati a partire dal livello di trasporto e alla postazione connessa viene assegnato un indirizzo IP appartenente alla sottorete degli utenti SSL VPN. Sarà poi cura degli amministratori di rete concedere ai singoli utenti o a quest'ultima \textit{subnet} l'accesso ai vari servizi interni. 
 
-L'esempio migliore e più esplicativo riguarda l'utilizzo del servizio \textit{Remote Desktop Protocol} (RDP) per il collegamento remoto a un determinato computer tramite interfaccia grafica. In ambienti lavorativi è un applicativo molto usato in quanto permettere ai dipendenti di poter lavorare sulle proprie postazioni in ufficio pur essendo fuori sede. Comunemente viene adibito un server apposito, definito solitamente \textit{terminal server}, per ricevere le connessioni dagli utenti remoti i quali si autenticano con le proprie credenziali del dominio aziendale. Data la notevole funzionalità che RDP offre e la sua nota vulnerabilità ad attacchi informatici gravi\footnote{}, configurare sul firewall un \textit{port forwarding} che inoltri le chiamate da internet all'IP pubblico aziendale attraverso la porta RDP (3389) verso il terminal server, non è assolutamente una pratica ideale. Ciò che normalmente si implementa è una autenticazione aggiuntiva alla rete interna aziendale tramite la VPN. In questo modo sarà necessario per il terminal server esporre la porta RDP solamente nella sottorete degli utenti autenticati nella VPN.
+L'esempio migliore e più esplicativo riguarda l'utilizzo del servizio \textit{Remote Desktop Protocol} (RDP) per il collegamento remoto a un determinato computer tramite interfaccia grafica. In ambienti lavorativi è un applicativo molto usato in quanto permettere ai dipendenti di poter lavorare sulle proprie postazioni in ufficio pur essendo fuori sede. Comunemente viene adibito un server apposito, definito solitamente \textit{terminal server}, per ricevere le connessioni dagli utenti remoti i quali si autenticano con le proprie credenziali del dominio aziendale. Data la notevole funzionalità che RDP offre e la sua nota vulnerabilità ad attacchi informatici gravi\footnote{\textit{BlueKeep} (CVE-2019-0708) è una vulnerabilità di RDP che permette l'esecuzione di codice da remoto}, configurare sul firewall un \textit{port forwarding} che inoltri le chiamate da internet all'IP pubblico aziendale attraverso la porta RDP (3389) verso il terminal server, non è assolutamente una pratica ideale. Ciò che normalmente si implementa è una autenticazione aggiuntiva alla rete interna aziendale tramite la VPN. In questo modo sarà necessario per il terminal server esporre la porta RDP solamente nella sottorete degli utenti autenticati nella VPN.
 
-Può capitare che si voglia mettere in comunicazione due host appartenenti a due reti private remote. Due aziende potrebbero voler collaborare su degli stessi clienti condividendo le stesse risorse e quindi sincronizzare da entrambi i lati le modifiche effettuate sui rispettivi file server. Un modo col quale i due server possono comunicare e trasferire i dati fra di loro è tramite un tunnel SSH. Si attiva su entrambi i server il servizio SSH e lo si configura in modo da permettere l'autenticazione a chiave pubblica vista in precedenza (Paragrafo \ref{fodt-int-01}). Pur essendo SSH un protocollo in sé sicuro grazie all'implementazione della cifratura dei dati trasmessi, è pur sempre un servizio che offre la \textit{shell} di un sistema remoto e un potenziale errore nela sua configurazione come semplicemente l'uso di algoritmi crittografici deboli unito alla sua esposizione in rete non contribuirebbe a rendere la rete aziendale sicura. Inoltre ci sarebbe anche la necessità di fare \textit{port forwarding}\footnote{} sul firewall dalla porta SSH verso il server appartenente alla rete interna, aggiungendo altre possibilità di commettere errori.
-\\ La pratica corretta, invece, consiste nel configurare un tunnel VPN \textit{site-to-site} fra le due reti remote sul quale si appoggerà a sua volta il tunnel SSH. Questa tipologia di VPN premette di creare una rotta statica implicita fra le due reti, in modo tale da poter comunicare fra asset diversi in reti distanti fisicamente come se la rete remota si trovasse su un segmento diverso della stessa intranet locale, senza quindi l'ausilio di software VPN \textit{client}. Per avere un ulterioire livello di sicurezza e limitare la superficie di attacco, se come in questo caso vi è la necessità di far comunicare due singoli host, la VPN verrà configurata in modo da permettere la trasmissione dati esclusivamente tra i loro indirizzi IP e non all'intera \textit{subnet} nella quale risiedono.
+Può capitare che si voglia mettere in comunicazione due host appartenenti a due reti private remote. Due aziende potrebbero voler collaborare su degli stessi clienti condividendo le stesse risorse e quindi sincronizzare da entrambi i lati le modifiche effettuate sui rispettivi file server. Un modo col quale i due server possono comunicare e trasferire i dati fra di loro è tramite un tunnel SSH. Si attiva su entrambi i server il servizio SSH e lo si configura in modo da permettere l'autenticazione a chiave pubblica vista in precedenza (Paragrafo \ref{fodt-int-01}). Pur essendo SSH un protocollo in sé sicuro grazie all'implementazione della cifratura dei dati trasmessi, è pur sempre un servizio che offre la \textit{shell} di un sistema remoto e un potenziale errore nela sua configurazione come semplicemente l'uso di algoritmi crittografici deboli unito alla sua esposizione in rete non contribuirebbe a rendere la rete aziendale sicura. Inoltre ci sarebbe anche la necessità di fare \textit{port forwarding} sul firewall dalla porta SSH verso il server appartenente alla rete interna, aggiungendo altre possibilità di commettere errori.
+\\ La pratica corretta, invece, consiste nel configurare un tunnel VPN \textit{site-to-site} fra le due reti remote sul quale si appoggerà a sua volta il tunnel SSH. Questa tipologia di VPN premette di creare una rotta statica implicita fra le due reti, in modo tale da poter comunicare fra asset diversi in reti distanti fisicamente come se la rete remota si trovasse su un segmento diverso della stessa intranet locale, senza quindi l'ausilio di software VPN \textit{client}. Per avere un ulteriore livello di sicurezza e limitare la superficie di attacco, se come in questo caso vi è la necessità di far comunicare due singoli host, la VPN verrà configurata in modo da permettere la trasmissione dati esclusivamente tra i loro indirizzi IP e non all'intera \textit{subnet} nella quale risiedono.
 
-Proteggere il confine con l'esterno vuol dire difendere gli asset e l'intera rete aziendale da attacchi instaurati da internet, riducendo il valore del vettore di attacco (Paragrafo \ref{metriche}). Di conseguenza si costringe l'attaccante ad agire adescando gli utenti interni alla rete tramite tecniche di \textit{social engeneering} ad esempio attraverso mail di \textit{phishing} o attacchi \textit{Man in the Middle}.
+Proteggere il confine con l'esterno vuol dire difendere gli asset e l'intera rete aziendale da attacchi instaurati da internet, riducendo il valore del vettore di attacco (Paragrafo \ref{metriche}). Di conseguenza si costringe l'attaccante ad agire adescando gli utenti interni alla rete tramite tecniche di \textit{social engineering} ad esempio attraverso mail di \textit{phishing} o attacchi \textit{Man in the Middle}.
 
 Nei target analizzati non sono stati rilevati servizi in ascolto su interfacce pubbliche, tuttavia nella rete interna risultano attivi diversi applicativi.
 \\Le aziende dovrebbero seguire una filosofia \textit{zero trust}, ovvero considerare non attendibile e non fidata qualsiasi entità, utente, dispositivo o servizio, anche se in diretta gestione dell'azienda, come la propria rete interna privata. Bisogna quindi implementare meccanismi che permettano, ogni volta in cui - ad esempio - un utente richiede una certa risorsa, sia all'interno che all'esterno della rete aziendale, di poter:
 
 \begin{itemize}
     \item Verificare la sua identità (anche attraverso metodi di autenticazione multi-fattore), quindi il suo ruolo, il contesto nel quale risiede, ad esempio se apre la connessione da casa o dall'ufficio, e a quale risorsa si sta tentando di accedere;
-    \item Controllare e ispezionare i movimenti dell'utente all'interno della connessione attraverso l'analisi dei \textit{log} del traffico di rete o la configurazione di filtri DNS\footnote{} sul firewall. Il sistema potrebbe ad esempio rilevare il tentativo di connessione da parte dell'utente a un sito sconosciuto e registrarne l'evento;
+    \item Controllare e ispezionare i movimenti dell'utente all'interno della connessione attraverso l'analisi dei \textit{log} del traffico di rete o la configurazione di filtri DNS\footnote{Meccanismi di difesa che analizzano il traffico in uscita e bloccano eventuali richieste di connessioni verso specifici domini. In particolare viene bloccata la richiesta DNS da parte del client.} sul firewall. Il sistema potrebbe ad esempio rilevare il tentativo di connessione da parte dell'utente a un sito sconosciuto e registrarne l'evento;
     \item Determinare le politiche di accesso o blocco in base allo scenario formatosi, il ruolo dell'utente, il contesto nel quale sta operando e il rischio che la connessione alla specifica risorsa comporterebbe per l'azienda.
 \end{itemize}
 
-Riassumendo, la \textit{policy zero trust} implica che a qualsiasi entità vengano forniti i minimi privilegi necessari per portare a termine il proprio lavoro. Questo si traduce nella pratica con l'implementazione di sistemi per il controllo degli accessi alle risorse, come cartelle condivise o dispositivi di rete, attraverso ad esempio la definizione di \textit{group policy} di dominio\footnote{} e regole di firewall restrittive fra \textit{subnet} e dispositivi diversi (si noti l'importanza di avere una rete segmentata). Mano a mano che l'utente ha un reale e confermato bisogno di accedere a un certo servizio gli si concedono gli opportuni privilegi. Questo sistema influisce certamente con l'operatività e la comodità d'uso dei sistemi produttivi aziendali, in quanto gli utenti non saranno completamente autonomi ma avranno bisogno dell'approvazione del responsabile e il supporto del \textit{team} tecnico per la concessione dei privilegi necessari. Questo, tuttavia, è il prezzo da pagare per avere un'infrastruttura solida, relativamente semplice da gestire e quindi orientata alla sicurezza.
+Riassumendo, la \textit{policy zero trust} implica che a qualsiasi entità vengano forniti i minimi privilegi necessari per portare a termine il proprio lavoro. Questo si traduce nella pratica con l'implementazione di sistemi per il controllo degli accessi alle risorse, come cartelle condivise o dispositivi di rete, attraverso ad esempio la definizione di \textit{group policy} di dominio\footnote{Regole applicate centralmente a livello di computer o utenti del dominio di rete aziendale. Permettono una grande granularità di configurazione delle postazioni e degli utenti.} e regole di firewall restrittive fra \textit{subnet} e dispositivi diversi (si noti l'importanza di avere una rete segmentata). Mano a mano che l'utente ha un reale e confermato bisogno di accedere a un certo servizio gli si concedono gli opportuni privilegi. Questo sistema influisce certamente con l'operatività e la comodità d'uso dei sistemi produttivi aziendali, in quanto gli utenti non saranno completamente autonomi ma avranno bisogno dell'approvazione del responsabile e il supporto del \textit{team} tecnico per la concessione dei privilegi necessari. Questo, tuttavia, è il prezzo da pagare per avere un'infrastruttura solida, relativamente semplice da gestire e quindi orientata alla sicurezza.
 \\ Un possibile scenario di applicazione della metodologia \textit{zero trust} è quello di un utente che tramite il proprio \textit{notebook}, solitamente collegato alla rete cablata, vuole accedere a un servizio, che risiede sul server, attraverso la rete \textit{wireless}. Se queste due tipologie di rete rappresentano due classi di indirizzamento diverse, l'utente inizialmente non dovrebbe poter connettersi utilizzando la rete senza fili, poiché ad esempio non vi è nessuna regola sul firewall che autorizzi le connessioni di transitare attraverso la porta corrispondente al servizio richiesto. Per rispettare quindi il criterio \textit{zero trust}, se l'utente non avesse un reale bisogno di richiedere la risorsa in quello specifico contesto, ma la richiesta fosse solo basata su una presunta comodità, allora la politica aziendale dovrebbe essere quella di non permettere una tale connessione.
 
 Questo approccio è valido anche per i dispositivi, come server o NAS, che non fanno riferimento ad alcuna persona fisica. Se un servizio non è necessario che sia esposto in rete il rimedio più semplice è disattivarlo completamente sul dispositivo, il quale dovrebbe fornire solo gli applicativi di cui si ha realmente bisogno ed offrirli esclusivamente ad un gruppo di utenti limitato. Un'accortezza che si potrebbe avere ad esempio è fare in modo che il NAS di backup non risponda in HTTP nella rete di produzione cosi che non possa essere preso di mira da attacchi \textit{brute force}.
@@ -569,9 +680,9 @@ Questo approccio è valido anche per i dispositivi, come server o NAS, che non f
 
 \chapter{Conclusione}
 
-La sicurezza della rete aziendale si deve muovere di pari passo con lo sviluppo e l'evoluzione dell'azienda stessa. Il successo di un'organizzazione è basato su ciò che produce e costruisce nel tempo, ovvero le sue proprietà intellettuali. Lo sviluppo di sistemi e metodologie per prevenire compromissioni alla confidenzialità, integrità e disponibilità della rete e quindi dell'infrastruttura aziendale, intesa come insieme di apparati e sistemi di produzione e gestione, che consentono di rendere efficienti i processi aziendali, permettono di comunicare con la \textit{extranet}\footnote{} e di offrire servizi anche agli utenti esterni come clienti e partner, dovrebbe costituire un processo continuativo e la sicurezza un investimento invece che un peso.
+La sicurezza della rete aziendale si deve muovere di pari passo con lo sviluppo e l'evoluzione dell'azienda stessa. Il successo di un'organizzazione è basato su ciò che produce e costruisce nel tempo, ovvero le sue proprietà intellettuali. È quindi interesse dell'azienda sviluppare sistemi e metodologie per prevenire compromissioni alla confidenzialità, integrità e disponibilità dell'infrastruttura aziendale, intesa come insieme di apparati e sistemi di produzione, che consentono di rendere efficienti i processi aziendali, permettono di comunicare con la \textit{extranet}\footnote{L'insieme delle infrastrutture di rete di proprietà dell'azienda (server, NAS, switch e firewall) esterne al perimetro aziendale.} e di offrire servizi anche agli utenti esterni come clienti e partner. Questo dovrebbe costituire un processo continuativo e la sicurezza un investimento invece che un peso.
 
-Considerando la sua estensione e complessità sia in termini di hardware che di software, una rete aziendale non gestita opportunamente espone un'ampia superficie di attacco tramite la quale si verificano i \textit{data breach} e le intrusioni di rete. Ogni postazione di lavoro, a prescindere dall'accortezza dell'utente di cui ne fa uso, ogni \textit{endpoint} di rete o macchinario di produzione, ogni applicativo esposto sia esternamente che internamente, è da considerarsi non affidabile. Per far fronte alla costante espansione delle reti aziendali nel tempo e di conseguenza alla loro superficie di attacco è necessario mettere in atto strategie che permettano di difendere su più livelli l'infrastruttura di rete aziendale. Idealmente un'organizzazione vorrebbe proteggere la propria infrastruttura senza pregiudicare la facilità d'uso dei sistemi produttivi. Tuttavia una rete sicura e robusta ha bisogno di adottare metodi diversi di difesa che vadano a coprire più componenti della rete e che inevitabilmente vanno a impattare sulla praticità e sull'autonomia degli utenti. Regole di firewal, segmentazione di rete, politiche di accesso alle risorse sui server e approcci \textit{zero trust} consentono di avere più strati di difesa sovrappostiin modo da avere sempre un meccanismo di riserva.
+Considerando la sua estensione e complessità sia in termini di hardware che di software, una rete aziendale non gestita opportunamente espone un'ampia superficie di attacco tramite la quale si verificano i \textit{data breach} e le intrusioni di rete. Ogni postazione di lavoro, a prescindere dall'accortezza dell'utente di cui ne fa uso, ogni \textit{endpoint} di rete o macchinario di produzione, ogni applicativo esposto sia esternamente che internamente, è da considerarsi non affidabile. Per far fronte alla costante espansione delle reti aziendali nel tempo e di conseguenza alla loro superficie di attacco è necessario mettere in atto strategie che permettano di difendere su più livelli l'infrastruttura di rete aziendale. Idealmente un'organizzazione vorrebbe proteggere la propria infrastruttura senza pregiudicare la facilità d'uso dei sistemi produttivi. Tuttavia una rete sicura e robusta ha bisogno di adottare metodi diversi di difesa che vadano a coprire più componenti della rete e che inevitabilmente vanno a impattare sulla praticità e sull'autonomia degli utenti. Regole di firewall, segmentazione di rete, politiche di accesso alle risorse sui server e approcci \textit{zero trust} consentono di avere più strati di difesa sovrapposti in modo da avere sempre un meccanismo di riserva.
 
 Al tempo stesso vi è la necessità di ridurre, monitorare e confinare il più possibile l'insieme delle componenti della rete, sia software che hardware, che possono rappresentare vettori di attacco utilizzati per compromettere l'infrastruttura, ovvero la superficie di attacco della rete aziendale. Il \textit{Vulnerability Assessment} consente di giungere proprio a questa necessità ed è uno strumento che in mano all'azienda permette di creare un inventario degli asset collegati in rete e avere un'idea delle principali debolezze più critiche, andando a scandagliare l'intera rete sia da un punto di vista fisicamente interno ed esterno. Il continuo processo di scansione e analisi dei risultati permette di ripensare i propri processi aziendali sviluppando un'architettura più semplice e organizzata, con chiare e intuitive interazioni fra le componenti. Una minore complessità dell'infrastruttura di rete, infatti, ha il vantaggio di essere più facile da amministrare e gestire, e quindi meno incline ad errori di configurazione.
 
@@ -633,141 +744,6 @@ Al tempo stesso vi è la necessità di ridurre, monitorare e confinare il più p
     \caption{: \textit{Knowledgebase}. Questo è il database delle vulnerabilità proprietario di \textit{Qualys} costantemente aggiornato. È possibile, per ogni voce, aggiungere commenti che verranno visualizzati nei report, modificare il livello di criticità delle vulnerabilità o disabilitarle in modo che le scansioni le ignorino.}
 \end{figure}
 
-
-\chapter{\textit{Technical reports}}
-\label{appendix:reports}
-
-\section{FODT-EXT-01}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-EXT-01_1.png}
-    \caption{}
-    \label{fig:fodt-ext-01_1}
-\end{figure}
-
-\pagebreak
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-EXT-01_2.png}
-    \caption{}
-    \label{fig:fodt-ext-01_2}
-\end{figure}
-
-\pagebreak
-
-\section{FODT-INT-01}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-01_1.png}
-    \caption{}
-    \label{fig:fodt-int-01_1}
-\end{figure}
-
-\pagebreak
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-01_2.png}
-    \caption{}
-    \label{fig:fodt-int-01_2}
-\end{figure}
-
-\pagebreak
-
-\section{FODT-INT-01a}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-01a_1.png}
-    \caption{}
-    \label{fig:fodt-int-01a_1}
-\end{figure}
-
-\pagebreak
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-01a_2.png}
-    \caption{}
-    \label{fig:fodt-int-01a_2}
-\end{figure}
-
-\pagebreak
-
-\section{FODT-INT-06}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-06_1.png}
-    \caption{}
-    \label{fig:fodt-int-06_1}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-06_2.png}
-    \caption{}
-    \label{fig:fodt-int-06_2}
-\end{figure}
-
-\pagebreak
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-06_3.png}
-    \caption{}
-    \label{fig:fodt-int-06_3}
-\end{figure}
-
-\pagebreak
-
-\section{FODT-INT-13}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-13_1.png}
-    \caption{}
-    \label{fig:fodt-int-13_1}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-13_2.png}
-    \caption{}
-    \label{fig:fodt-int-13_2}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-13_3.png}
-    \caption{}
-    \label{fig:fodt-int-13_3}
-\end{figure}
-
-\pagebreak
-
-\section{FODT-INT-31}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-31_1.png}
-    \caption{}
-    \label{fig:fodt-int-31_1}
-\end{figure}
-
-\pagebreak
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1\linewidth]{images/FODT-INT-31_2.png}
-    \caption{}
-    \label{fig:fodt-int-31_2}
-\end{figure}
-
-\pagebreak
 
 %% Parte conclusiva del documento; tipicamente per riassunto, bibliografia e/o indice analitico.
 \backmatter
